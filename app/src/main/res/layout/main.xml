@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:layout_weight="0">
+
+        <com.dozingcatsoftware.bouncy.ScoreView
+            android:id="@+id/scoreView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:focusable="false"
+            android:onClick="scoreViewClicked" />
+
+        <!-- layout_gravity needs to be set for older Android versions:
+        https://stackoverflow.com/questions/24842244/margins-inside-framelayout-is-not-working-in-android-2-2
+        -->
+        <ImageView
+            android:id="@+id/pauseIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="top"
+            android:src="@drawable/ic_baseline_pause_circle_outline_24" />
+
+    </FrameLayout>
+
+
+	<FrameLayout
+		android:layout_width="fill_parent"
+		android:layout_height="0px"
+		android:layout_weight="9">
+
+		<com.dozingcatsoftware.bouncy.CanvasFieldView
+			android:id="@+id/canvasFieldView"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:defaultFocusHighlightEnabled="false"
+			android:visibility="gone" />
+
+		<com.dozingcatsoftware.bouncy.GLFieldView
+			android:id="@+id/glFieldView"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:defaultFocusHighlightEnabled="false"
+			android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img"
+            android:alpha="0.25"
+            tools:targetApi="honeycomb"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/app_name" />
+
+        <LinearLayout
+            android:id="@+id/buttonPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@layout/rounded_border"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp">
+
+            <LinearLayout
+                android:id="@+id/selectTableRow"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/previousTableButton"
+                    android:src="@drawable/ic_baseline_arrow_left_60"
+                    android:background="#0000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="doPreviousTable"
+                    android:focusableInTouchMode="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:textColor="#F0F0F0"
+                    android:text="@string/change_table_button_label" />
+                <ImageButton
+                    android:id="@+id/nextTableButton"
+                    android:src="@drawable/ic_baseline_arrow_right_60"
+                    android:background="#0000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="doNextTable"
+                    android:focusableInTouchMode="true" />
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/unlimitedBallsToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/unlimited_balls_label" />
+
+                <Button
+                    android:id="@+id/startGameButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:onClick="doStartGame"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/start_game_button_label" />
+
+                <!-- Resume button is at the top when visible, so it gets extra top margin. -->
+                <Button
+                    android:id="@+id/resumeGameButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="doStartGame"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/resume_game_button_label"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/endGameButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="doEndGame"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/end_game_button_label"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/highScoreButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="showHighScore"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/show_high_score_button_label" />
+
+                <Button
+                    android:id="@+id/aboutButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="doAbout"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/help_button_label" />
+
+                <Button
+                    android:id="@+id/preferencesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:onClick="doPreferences"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/preferences_button_label" />
+
+                <Button
+                    android:id="@+id/quitButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:onClick="doQuit"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/quit_button_label" />
+            </TableLayout>
+        </LinearLayout>
+
+		<TableLayout
+			android:id="@+id/highScorePanel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+            android:background="@layout/rounded_border"
+			android:orientation="vertical"
+			android:padding="32dp"
+			android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#F0F0F0"
+                android:paddingBottom="20dp"
+                android:text="@string/high_score_table_title" />
+
+            <LinearLayout
+                android:id="@+id/highScoreListLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/noHighScoresTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#F0F0F0"
+                android:textSize="18sp"
+                android:paddingBottom="24dp"
+                android:text="@string/no_high_scores_message" />
+
+            <Button
+                android:id="@+id/hideHighScoreButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:onClick="hideHighScore"
+                android:focusableInTouchMode="true"
+                android:text="@string/hide_high_score_button_label" />
+
+        </TableLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
