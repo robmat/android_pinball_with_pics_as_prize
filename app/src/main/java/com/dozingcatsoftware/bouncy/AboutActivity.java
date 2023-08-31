@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.TextView;
+import com.batodev.pinball.R;
 
 public class AboutActivity extends Activity {
     /** Called when the activity is first created. */

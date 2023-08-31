@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.AudioManager;
+import com.batodev.pinball.R;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;

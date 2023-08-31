@@ -8,6 +8,7 @@ import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.view.KeyEvent;
+import com.batodev.pinball.R;
 
 public class BouncyPreferences extends PreferenceActivity {
 
