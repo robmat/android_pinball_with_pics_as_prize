@@ -1,6 +1,5 @@
 package com.batodev.pinball
 
-import android.annotation.TargetApi
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
@@ -19,6 +18,8 @@ class SettingsHelper(context: Context) {
         editor.putString("uncoveredPics", preferences.uncoveredPics.joinToString(","))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             editor.apply()
+        } else {
+            editor.commit()
         }
     }
 
@@ -33,5 +34,5 @@ class SettingsHelper(context: Context) {
 }
 
 data class Preferences(
-    var uncoveredPics: MutableList<String>
+    var uncoveredPics: MutableList<String>,
 )

@@ -8,12 +8,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.AudioManager;
-import com.batodev.pinball.R;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
@@ -32,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.badlogic.gdx.physics.box2d.Box2D;
+import com.batodev.pinball.R;
 import com.dozingcatsoftware.vectorpinball.model.Field;
 import com.dozingcatsoftware.vectorpinball.model.FieldDriver;
 import com.dozingcatsoftware.vectorpinball.model.GameState;
@@ -88,7 +87,7 @@ public class BouncyActivity extends Activity {
         int stringId = getResources().getIdentifier(key, "string", getPackageName());
         return getString(stringId, params);
     };
-    Field field = new Field(System::currentTimeMillis, stringLookupFn, new VPSoundpool.Player());
+    final Field field = new Field(System::currentTimeMillis, stringLookupFn, new VPSoundpool.Player());
 
     int numberOfLevels;
     int currentLevel = 1;
@@ -108,7 +107,7 @@ public class BouncyActivity extends Activity {
     boolean useHapticFeedback;
 
     // Delay after ending a game, before a touch will start a new game.
-    static final long END_GAME_DELAY_MS = 1000;
+    static final long END_GAME_DELAY_MS = 3000;
     Long endGameTime = System.currentTimeMillis() - END_GAME_DELAY_MS;
 
     FieldDriver fieldDriver = new FieldDriver();
@@ -240,7 +239,9 @@ public class BouncyActivity extends Activity {
         (new Thread(VPSoundpool::loadSounds)).start();
         VPSoundpool.hapticFn = () -> {
             if (supportsHapticFeedback && useHapticFeedback) {
-                scoreView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
+                    scoreView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                }
             }
         };
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -414,10 +415,8 @@ public class BouncyActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
 
-        switch (requestCode) {
-            case ACTIVITY_PREFERENCES:
-                updateFromPreferences();
-                break;
+        if (requestCode == ACTIVITY_PREFERENCES) {
+            updateFromPreferences();
         }
     }
 
@@ -432,7 +431,7 @@ public class BouncyActivity extends Activity {
 
     // Update settings from preferences, called at launch and when preferences activity finishes.
     void updateFromPreferences() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
         fieldViewManager.setIndependentFlippers(prefs.getBoolean("independentFlippers", true));
         scoreView.setShowFPS(prefs.getBoolean("showFPS", false));
 
@@ -522,7 +521,7 @@ public class BouncyActivity extends Activity {
      * list, which will be [0] if no high scores have been stored.
      */
     List<Long> highScoresFromPreferences(int theLevel) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
         String scoresAsString = prefs.getString(highScorePrefsKeyForLevel(theLevel), "");
         if (scoresAsString.length() > 0) {
             try {
@@ -543,7 +542,7 @@ public class BouncyActivity extends Activity {
     }
 
     Long lastScoreFromPreferences(int theLevel) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
         return prefs.getLong(lastScorePrefsKeyForLevel(theLevel), 0L);
     }
 
@@ -553,11 +552,15 @@ public class BouncyActivity extends Activity {
         for (int i = 1; i < scores.size(); i++) {
             scoresAsString.append(",").append(scores.get(i));
         }
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(highScorePrefsKeyForLevel(level), scoresAsString.toString());
         editor.putLong(lastScorePrefsKeyForLevel(level), lastScore);
-        editor.commit();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            editor.apply();
+        } else {
+            editor.commit();
+        }
     }
 
     List<Long> highScoresFromPreferencesForCurrentLevel() {
@@ -590,17 +593,21 @@ public class BouncyActivity extends Activity {
     }
 
     int getInitialLevel() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
         int startLevel = prefs.getInt(INITIAL_LEVEL_PREFS_KEY, 1);
         if (startLevel < 1 || startLevel > numberOfLevels) startLevel = 1;
         return startLevel;
     }
 
     void setInitialLevel(int level) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(INITIAL_LEVEL_PREFS_KEY, level);
-        editor.commit();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            editor.apply();
+        } else {
+            editor.commit();
+        }
     }
 
     // Button action methods defined by android:onClick values in main.xml.
@@ -679,10 +686,6 @@ public class BouncyActivity extends Activity {
         scoreView.setHighScores(highScores);
         // Performance can be different on different tables.
         fieldDriver.resetFrameRate();
-    }
-
-    public void doSwitchTable(View view) {
-        doNextTable(view);
     }
 
     public void doNextTable(View view) {
