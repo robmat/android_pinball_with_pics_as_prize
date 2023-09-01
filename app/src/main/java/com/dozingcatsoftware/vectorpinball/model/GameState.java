@@ -1,6 +1,10 @@
 package com.dozingcatsoftware.vectorpinball.model;
 
+import com.dozingcatsoftware.bouncy.BouncyActivity;
+
 public class GameState {
+
+    public BouncyActivity bouncyActivity;
 
     // Defines how score multiplier is affected when ball is lost.
     public enum MultiplierBehavior {
@@ -56,6 +60,7 @@ public class GameState {
 
     public void addScore(long points) {
         score += points * scoreMultiplier;
+        bouncyActivity.scoreListener(score);
     }
 
     public void addExtraBall() {

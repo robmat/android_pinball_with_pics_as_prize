@@ -3,6 +3,7 @@ package com.dozingcatsoftware.bouncy;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.AudioManager;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.batodev.pinball.ImageHelper;
 import com.batodev.pinball.R;
+import com.batodev.pinball.SettingsHelper;
 import com.dozingcatsoftware.vectorpinball.model.Field;
 import com.dozingcatsoftware.vectorpinball.model.FieldDriver;
 import com.dozingcatsoftware.vectorpinball.model.GameState;
@@ -42,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class BouncyActivity extends Activity {
@@ -113,6 +116,8 @@ public class BouncyActivity extends Activity {
     OrientationListener orientationListener;
 
     private static final String TAG = "BouncyActivity";
+    private String prizeImageName;
+    private boolean prizeImage10kWon = false, prizeImage100kWon = false;
 
     /**
      * Called when the activity is first created.
@@ -633,10 +638,14 @@ public class BouncyActivity extends Activity {
                     field.startGame();
                 }
             }
+            prizeImage10kWon = false;
+            prizeImage100kWon = false;
             handler.post(() -> {
                 ImageView background = findViewById(R.id.background);
                 background.setVisibility(View.VISIBLE);
-                background.setImageBitmap(ImageHelper.random10kBitmap(BouncyActivity.this));
+                Map<String, Object> stringObjectMap = ImageHelper.random10kBitmap(BouncyActivity.this);
+                background.setImageBitmap((Bitmap) stringObjectMap.get(ImageHelper.BITMAP));
+                this.prizeImageName = Objects.requireNonNull(stringObjectMap.get(ImageHelper.NAME)).toString();
             });
             VPSoundpool.playStart();
             endGameTime = null;
@@ -749,5 +758,35 @@ public class BouncyActivity extends Activity {
     public void endGameListener() {
         ImageView background = findViewById(R.id.background);
         background.setVisibility(View.GONE);
+    }
+
+    public void scoreListener(long score) {
+        if (score >= 10_000L) {
+            if (!prizeImage10kWon) {
+                handler.post(() -> {
+                    field.showGameMessage(getString(R.string.image_unlocked_msg_10k), 3000, true);
+                    SettingsHelper settingsHelper = new SettingsHelper(BouncyActivity.this);
+                    settingsHelper.getPreferences().getUncoveredPics().add(prizeImageName);
+                    settingsHelper.savePreferences();
+                });
+                prizeImage10kWon = true;
+            }
+        }
+        if (score >= 100_000L) {
+            if (!prizeImage100kWon) {
+                handler.post(() -> {
+                    field.showGameMessage(getString(R.string.image_unlocked_msg_100k), 3000, true);
+                    ImageView background = findViewById(R.id.background);
+                    background.setVisibility(View.VISIBLE);
+                    Map<String, Object> stringObjectMap = ImageHelper.random100kBitmap(BouncyActivity.this);
+                    background.setImageBitmap((Bitmap) stringObjectMap.get(ImageHelper.BITMAP));
+                    this.prizeImageName = Objects.requireNonNull(stringObjectMap.get(ImageHelper.NAME)).toString();
+                    SettingsHelper settingsHelper = new SettingsHelper(BouncyActivity.this);
+                    settingsHelper.getPreferences().getUncoveredPics().add(prizeImageName);
+                    settingsHelper.savePreferences();
+                });
+                prizeImage100kWon = true;
+            }
+        }
     }
 }

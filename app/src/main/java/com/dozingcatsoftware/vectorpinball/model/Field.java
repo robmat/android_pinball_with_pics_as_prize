@@ -90,6 +90,7 @@ public class Field implements ContactListener {
         this.stringResolver = sr;
         this.audioPlayer = player;
         this.bouncyActivity = bouncyActivity;
+        gameState.bouncyActivity = bouncyActivity;
     }
 
     // Interface to allow custom behavior for various game events.
@@ -291,7 +292,7 @@ public class Field implements ContactListener {
      */
     public void scheduleAction(long intervalMillis, Runnable action) {
         ScheduledAction sa = new ScheduledAction();
-        sa.actionTimeNanos = gameTimeNanos + TimeUnit.MILLISECONDS.toNanos(intervalMillis);;
+        sa.actionTimeNanos = gameTimeNanos + TimeUnit.MILLISECONDS.toNanos(intervalMillis);
         sa.action = action;
         scheduledActions.add(sa);
     }

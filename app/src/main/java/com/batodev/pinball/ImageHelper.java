@@ -8,14 +8,17 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
 import com.dozingcatsoftware.bouncy.BouncyActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -23,6 +26,9 @@ import java.util.stream.Collectors;
 public class ImageHelper {
 
     public static final String PRIZE_IMAGES_10_K = "prize-images-10k";
+    public static final String PRIZE_IMAGES_100_K = "prize-images-100k";
+    public static final String NAME = "name";
+    public static final String BITMAP = "bitmap";
 
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
         Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
@@ -45,16 +51,43 @@ public class ImageHelper {
         return output;
     }
 
-    public static Bitmap random10kBitmap(BouncyActivity bouncyActivity) {
-        List<String> uncoveredPics = new SettingsHelper(bouncyActivity).getPreferences().getUncoveredPics();
+    static List<String> IMG_PATHS = List.of(PRIZE_IMAGES_10_K, PRIZE_IMAGES_100_K);
+
+    public static Map<String, Object> random10kBitmap(BouncyActivity bouncyActivity) {
+        return pickImage(bouncyActivity, PRIZE_IMAGES_10_K);
+    }
+
+    private static Map<String, Object> pickImage(BouncyActivity bouncyActivity, String imagePath) {
+        List<String> uncoveredPics = new ArrayList<>(new SettingsHelper(bouncyActivity).getPreferences().getUncoveredPics());
         List<String> allPrizeImg;
         try {
-            allPrizeImg = Arrays.stream(Objects.requireNonNull(bouncyActivity.getAssets().list(PRIZE_IMAGES_10_K))).collect(Collectors.toList());
+            allPrizeImg = Arrays.stream(Objects.requireNonNull(bouncyActivity.getAssets().list(imagePath))).collect(Collectors.toList());
             allPrizeImg.removeAll(uncoveredPics);
             String prizeImage = allPrizeImg.isEmpty() ? uncoveredPics.get(new Random().nextInt(uncoveredPics.size())) : allPrizeImg.get(new Random().nextInt(allPrizeImg.size()));
-            return getRoundedCornerBitmap(BitmapFactory.decodeStream(bouncyActivity.getAssets().open(PRIZE_IMAGES_10_K + File.separator + prizeImage)), 100);
-        } catch (IOException e) {
+            Log.d(ImageHelper.class.getSimpleName(), "prizeImage: " + prizeImage);
+            String imageFolder = IMG_PATHS.stream().filter(imgPath -> {
+                try {
+                    String[] list = bouncyActivity.getAssets().list(imgPath);
+                    List<String> fileList = Arrays.asList(Objects.requireNonNull(list));
+                    Log.d(ImageHelper.class.getSimpleName(), "fileList: " + fileList);
+                    return fileList.contains(prizeImage);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }).findAny().orElseThrow(() -> new IllegalStateException("Uncovered image " + prizeImage + " is nowhere to found?"));
+            Log.d(ImageHelper.class.getSimpleName(), "imageFolder: " + imageFolder);
+            InputStream stream = bouncyActivity.getAssets().open(imageFolder + File.separator + prizeImage);
+            Bitmap bitmap = BitmapFactory.decodeStream(stream);
+            stream.close();
+            return Map.of(BITMAP,
+                    getRoundedCornerBitmap(bitmap, 100),
+                    NAME, prizeImage);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Map<String, Object> random100kBitmap(BouncyActivity bouncyActivity) {
+        return pickImage(bouncyActivity, PRIZE_IMAGES_100_K);
     }
 }

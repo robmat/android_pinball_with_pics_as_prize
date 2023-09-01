@@ -24,15 +24,15 @@ class SettingsHelper(context: Context) {
     }
 
     private fun loadPreferences(): Preferences {
-        val preferences = Preferences(mutableListOf())
+        val preferences = Preferences(mutableSetOf())
         preferences.uncoveredPics =
-            sharedPreferences.getString("uncoveredPics", "")?.split(",")?.toMutableList()
-                ?: mutableListOf()
-        preferences.uncoveredPics = preferences.uncoveredPics.filter { it != "" }.toMutableList()
+            sharedPreferences.getString("uncoveredPics", "")?.split(",")?.toMutableSet()
+                ?: mutableSetOf()
+        preferences.uncoveredPics = preferences.uncoveredPics.filter { it != "" }.toMutableSet()
         return preferences
     }
 }
 
 data class Preferences(
-    var uncoveredPics: MutableList<String>,
+    var uncoveredPics: MutableSet<String>,
 )
