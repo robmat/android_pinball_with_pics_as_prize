@@ -52,7 +52,7 @@ public class ImageHelper {
             allPrizeImg = Arrays.stream(Objects.requireNonNull(bouncyActivity.getAssets().list(PRIZE_IMAGES_10_K))).collect(Collectors.toList());
             allPrizeImg.removeAll(uncoveredPics);
             String prizeImage = allPrizeImg.isEmpty() ? uncoveredPics.get(new Random().nextInt(uncoveredPics.size())) : allPrizeImg.get(new Random().nextInt(allPrizeImg.size()));
-            return getRoundedCornerBitmap(BitmapFactory.decodeStream(bouncyActivity.getAssets().open(PRIZE_IMAGES_10_K + File.separator + prizeImage)), 120);
+            return getRoundedCornerBitmap(BitmapFactory.decodeStream(bouncyActivity.getAssets().open(PRIZE_IMAGES_10_K + File.separator + prizeImage)), 100);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
