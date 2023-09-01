@@ -3,8 +3,6 @@ package com.dozingcatsoftware.bouncy;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.AudioManager;
@@ -30,13 +28,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.badlogic.gdx.physics.box2d.Box2D;
+import com.batodev.pinball.ImageHelper;
 import com.batodev.pinball.R;
 import com.dozingcatsoftware.vectorpinball.model.Field;
 import com.dozingcatsoftware.vectorpinball.model.FieldDriver;
 import com.dozingcatsoftware.vectorpinball.model.GameState;
 import com.dozingcatsoftware.vectorpinball.model.IStringResolver;
 import com.dozingcatsoftware.vectorpinball.util.IOUtils;
-import com.dozingcatsoftware.vectorpinball.view.ImageHelper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -87,7 +85,7 @@ public class BouncyActivity extends Activity {
         int stringId = getResources().getIdentifier(key, "string", getPackageName());
         return getString(stringId, params);
     };
-    final Field field = new Field(System::currentTimeMillis, stringLookupFn, new VPSoundpool.Player());
+    final Field field = new Field(System::currentTimeMillis, stringLookupFn, new VPSoundpool.Player(), this);
 
     int numberOfLevels;
     int currentLevel = 1;
@@ -115,8 +113,6 @@ public class BouncyActivity extends Activity {
     OrientationListener orientationListener;
 
     private static final String TAG = "BouncyActivity";
-    private ImageView background;
-    private Bitmap roundedCornerBitmap;
 
     /**
      * Called when the activity is first created.
@@ -129,9 +125,7 @@ public class BouncyActivity extends Activity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
-        background = findViewById(R.id.background);
-        roundedCornerBitmap = ImageHelper.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.img), 120);
-        background.setImageBitmap(roundedCornerBitmap);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             this.getWindow().setNavigationBarColor(Color.BLACK);
         }
@@ -639,6 +633,11 @@ public class BouncyActivity extends Activity {
                     field.startGame();
                 }
             }
+            handler.post(() -> {
+                ImageView background = findViewById(R.id.background);
+                background.setVisibility(View.VISIBLE);
+                background.setImageBitmap(ImageHelper.random10kBitmap(BouncyActivity.this));
+            });
             VPSoundpool.playStart();
             endGameTime = null;
             updateButtons();
@@ -745,5 +744,10 @@ public class BouncyActivity extends Activity {
         scoreItem.setTextColor(Color.argb(255, 240, 240, 240));
         scoreItem.setGravity(Gravity.END);
         return scoreItem;
+    }
+
+    public void endGameListener() {
+        ImageView background = findViewById(R.id.background);
+        background.setVisibility(View.GONE);
     }
 }

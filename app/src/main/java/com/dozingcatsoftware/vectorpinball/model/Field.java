@@ -20,6 +20,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.dozingcatsoftware.bouncy.BouncyActivity;
 import com.dozingcatsoftware.vectorpinball.elements.BumperElement;
 import com.dozingcatsoftware.vectorpinball.elements.DropTargetGroupElement;
 import com.dozingcatsoftware.vectorpinball.elements.FieldElement;
@@ -29,6 +30,7 @@ import com.dozingcatsoftware.vectorpinball.elements.SensorElement;
 
 public class Field implements ContactListener {
 
+    private final BouncyActivity bouncyActivity;
     FieldLayout layout;
     WorldLayers worlds;
 
@@ -83,10 +85,11 @@ public class Field implements ContactListener {
     IStringResolver stringResolver;
 
     // Pass System::currentTimeMillis as `milliTimeFn` to use the standard system clock.
-    public Field(LongSupplier milliTimeFn, IStringResolver sr, AudioPlayer player) {
+    public Field(LongSupplier milliTimeFn, IStringResolver sr, AudioPlayer player, BouncyActivity bouncyActivity) {
         this.milliTimeFn = milliTimeFn;
         this.stringResolver = sr;
         this.audioPlayer = player;
+        this.bouncyActivity = bouncyActivity;
     }
 
     // Interface to allow custom behavior for various game events.
@@ -584,6 +587,7 @@ public class Field implements ContactListener {
         this.getGameState().setGameInProgress(false);
         this.showGameMessage(this.resolveString("game_over_message"), 2500);
         getDelegate().gameEnded(this);
+        bouncyActivity.endGameListener();
     }
 
     /** Adjusts gravity in response to the device being tilted; not currently used. */
