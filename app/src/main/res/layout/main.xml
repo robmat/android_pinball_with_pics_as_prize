@@ -125,7 +125,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
+                    android:padding="8dp"
                     android:onClick="doStartGame"
+                    android:background="@drawable/btn_background"
                     android:focusableInTouchMode="true"
                     android:text="@string/start_game_button_label" />
 
@@ -136,7 +138,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="8dp"
+                    android:padding="8dp"
                     android:onClick="doStartGame"
+                    android:background="@drawable/btn_background"
                     android:focusableInTouchMode="true"
                     android:text="@string/resume_game_button_label"
                     android:visibility="gone" />
@@ -146,17 +150,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:padding="8dp"
                     android:onClick="doEndGame"
                     android:focusableInTouchMode="true"
                     android:text="@string/end_game_button_label"
+                    android:background="@drawable/btn_background"
                     android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/galleryButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:padding="8dp"
+                    android:onClick="showGallery"
+                    android:background="@drawable/btn_background"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/show_gallery_button_label" />
 
                 <Button
                     android:id="@+id/highScoreButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:padding="8dp"
                     android:onClick="showHighScore"
+                    android:background="@drawable/btn_background"
                     android:focusableInTouchMode="true"
                     android:text="@string/show_high_score_button_label" />
 
@@ -165,7 +184,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:padding="8dp"
                     android:onClick="doAbout"
+                    android:background="@drawable/btn_background"
                     android:focusableInTouchMode="true"
                     android:text="@string/help_button_label" />
 
@@ -174,7 +195,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
+                    android:padding="8dp"
                     android:onClick="doPreferences"
+                    android:background="@drawable/btn_background"
                     android:focusableInTouchMode="true"
                     android:text="@string/preferences_button_label" />
 
@@ -183,7 +206,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
+                    android:padding="8dp"
                     android:onClick="doQuit"
+                    android:background="@drawable/btn_background"
                     android:focusableInTouchMode="true"
                     android:text="@string/quit_button_label" />
             </TableLayout>

@@ -27,10 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.dozingcatsoftware.bouncy.AboutActivity" >
-        </activity>
-        <activity android:name="com.dozingcatsoftware.bouncy.BouncyPreferences" >
-        </activity>
+        <activity android:name="com.dozingcatsoftware.bouncy.AboutActivity" />
+        <activity android:name="com.dozingcatsoftware.bouncy.BouncyPreferences"/>
+        <activity android:name=".GalleryActivity" />
     </application>
 
 </manifest>

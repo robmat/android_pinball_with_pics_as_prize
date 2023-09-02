@@ -1,5 +1,6 @@
 package com.batodev.pinball;
 
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -10,7 +11,11 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.dozingcatsoftware.bouncy.BouncyActivity;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,16 +70,7 @@ public class ImageHelper {
             allPrizeImg.removeAll(uncoveredPics);
             String prizeImage = allPrizeImg.isEmpty() ? uncoveredPics.get(new Random().nextInt(uncoveredPics.size())) : allPrizeImg.get(new Random().nextInt(allPrizeImg.size()));
             Log.d(ImageHelper.class.getSimpleName(), "prizeImage: " + prizeImage);
-            String imageFolder = IMG_PATHS.stream().filter(imgPath -> {
-                try {
-                    String[] list = bouncyActivity.getAssets().list(imgPath);
-                    List<String> fileList = Arrays.asList(Objects.requireNonNull(list));
-                    Log.d(ImageHelper.class.getSimpleName(), "fileList: " + fileList);
-                    return fileList.contains(prizeImage);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }).findAny().orElseThrow(() -> new IllegalStateException("Uncovered image " + prizeImage + " is nowhere to found?"));
+            String imageFolder = findPathForImage(bouncyActivity.getAssets(), prizeImage);
             Log.d(ImageHelper.class.getSimpleName(), "imageFolder: " + imageFolder);
             InputStream stream = bouncyActivity.getAssets().open(imageFolder + File.separator + prizeImage);
             Bitmap bitmap = BitmapFactory.decodeStream(stream);
@@ -89,5 +85,29 @@ public class ImageHelper {
 
     public static Map<String, Object> random100kBitmap(BouncyActivity bouncyActivity) {
         return pickImage(bouncyActivity, PRIZE_IMAGES_100_K);
+    }
+
+    @NotNull
+    public static Bitmap findBitmap(@NotNull String imgName, @NotNull GalleryActivity galleryActivity) {
+        String imageFolder = findPathForImage(galleryActivity.getAssets(), imgName);
+        try {
+            return BitmapFactory.decodeStream(galleryActivity.getAssets().open(imageFolder + File.separator + imgName));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static String findPathForImage(AssetManager galleryActivity, @NonNull String imgName) {
+        String imageFolder = IMG_PATHS.stream().filter(imgPath -> {
+            try {
+                String[] list = galleryActivity.list(imgPath);
+                List<String> fileList = Arrays.asList(Objects.requireNonNull(list));
+                Log.d(ImageHelper.class.getSimpleName(), "fileList: " + fileList);
+                return fileList.contains(imgName);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).findAny().orElseThrow(() -> new IllegalStateException("Uncovered image " + imgName + " is nowhere to found?"));
+        return imageFolder;
     }
 }

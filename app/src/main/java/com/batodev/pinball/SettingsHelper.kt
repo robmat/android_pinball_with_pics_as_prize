@@ -16,11 +16,7 @@ class SettingsHelper(context: Context) {
     fun savePreferences() {
         val editor = sharedPreferences.edit()
         editor.putString("uncoveredPics", preferences.uncoveredPics.joinToString(","))
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            editor.apply()
-        } else {
-            editor.commit()
-        }
+        editor.apply()
     }
 
     private fun loadPreferences(): Preferences {

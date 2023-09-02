@@ -27,8 +27,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.badlogic.gdx.physics.box2d.Box2D;
+import com.batodev.pinball.GalleryActivity;
 import com.batodev.pinball.ImageHelper;
 import com.batodev.pinball.R;
 import com.batodev.pinball.SettingsHelper;
@@ -716,6 +718,13 @@ public class BouncyActivity extends Activity {
         updateButtons();
     }
 
+    public void showGallery(View view) {
+        if (new SettingsHelper(this).getPreferences().getUncoveredPics().size() > 0) {
+            startActivity(new Intent(this, GalleryActivity.class));
+        } else {
+            Toast.makeText(this, R.string.play_the_game_to_unlock_pictures, Toast.LENGTH_LONG).show();
+        }
+    }
     public void hideHighScore(View view) {
         showingHighScores = false;
         updateButtons();
