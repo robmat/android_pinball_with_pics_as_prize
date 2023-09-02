@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<string name="app_name" translatable="false">Vector Pinball</string>
 
 	<string name="independent_flippers_pref_title">Dianas independientes</string>
@@ -76,4 +75,4 @@
 	<string name="show_high_score_button_label">Mejores puntajes</string>
 	<string name="hide_high_score_button_label">OK</string>
 	<string name="high_score_table_title">Mejores puntajes</string>
-</resources>
+<string name="image_unlocked_msg_10k">¡Nueva imagen agregada a la galería de imágenes!</string><string name="image_unlocked_msg_100k">¡Se desbloquea una imagen oculta!</string><string name="back">Atrás</string><string name="show_gallery_button_label">Galería</string><string name="play_the_game_to_unlock_pictures">¡Juega primero para desbloquear nuevas imágenes!</string></resources>

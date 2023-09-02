@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="independent_flippers_pref_title">Niezależne łapki</string>
     <string name="independent_flippers_pref_summary_on">Stuknięcie aktywuje łapkę po tej samej stronie ekranu</string>
     <string name="independent_flippers_pref_summary_off">Każde stuknięcie aktywuje obie łapki</string>
@@ -69,4 +68,4 @@
     <string name="shoot_ramp_jackpot_message">Strzel w rampę, aby zgarnąć premię</string>
     <string name="constellation_complete_message">Konstelacja %1$s kompletna</string>
 
-</resources>
+<string name="app_name">Wektor Pinball</string><string name="quit_button_label">Zrezygnować</string><string name="ball_saved_message">Piłka uratowana</string><string name="no_high_scores_message">Brak wyników dla tej tabeli</string><string name="show_high_score_button_label">Wysokie noty</string><string name="hide_high_score_button_label">OK</string><string name="high_score_table_title">Wysokie noty</string><string name="image_unlocked_msg_10k">Nowe zdjęcie dodane do galerii zdjęć!</string><string name="image_unlocked_msg_100k">Ukryty obraz jest odblokowany!</string><string name="back">Z powrotem</string><string name="show_gallery_button_label">Galeria</string><string name="play_the_game_to_unlock_pictures">Najpierw zagraj w grę, aby odblokować nowe zdjęcia!</string></resources>

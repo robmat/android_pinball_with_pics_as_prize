@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="independent_flippers_pref_title">Sendependaj puŝiloj</string>
     <string name="independent_flippers_pref_summary_on">Frapeto aktivigas puŝilon ĉe la sama flanko de la ekrano</string>
     <string name="independent_flippers_pref_summary_off">Ĉiu frapeto aktivigas ambaŭ puŝilojn</string>
@@ -69,4 +68,4 @@
     <string name="shoot_ramp_jackpot_message">Trafu ramplon por gajni premion</string>
     <string name="constellation_complete_message">Stelfiguro %1$s kompleta</string>
 
-</resources>
+<string name="app_name">Vektora Pinball</string><string name="quit_button_label">Forlasu</string><string name="ball_saved_message">Pilko Savita</string><string name="no_high_scores_message">Neniuj poentoj por ĉi tiu tabelo</string><string name="show_high_score_button_label">Altaj poentoj</string><string name="hide_high_score_button_label">bone</string><string name="high_score_table_title">Altaj poentoj</string><string name="image_unlocked_msg_10k">Nova bildo aldonita al galerio de bildoj!</string><string name="image_unlocked_msg_100k">Kaŝita bildo estas malŝlosita!</string><string name="back">Reen</string><string name="show_gallery_button_label">Galerio</string><string name="play_the_game_to_unlock_pictures">Ludu la ludon unue por malŝlosi novajn bildojn!</string></resources>
