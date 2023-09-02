@@ -57,10 +57,8 @@ class GalleryActivity : Activity() {
     }
 
     fun shareClicked(view: View) {
-        val scenes = assets.list("scenes")?.filter { s -> s.contains(currentPic) }?.toList()
-        if (scenes?.size != 1) throw java.lang.IllegalStateException("No scene found, or too many for ${currentPic}")
-        val inputStream: InputStream = assets.open("scenes/${scenes[0]}")
-
+        val imgFolder = ImageHelper.findPathForImage(this.assets, currentPic)
+        val inputStream = assets.open("${imgFolder}${File.separator}${currentPic}")
         val tmpImgPath = "tmp_shared/tmp.png"
         val file = File(filesDir, tmpImgPath)
         File(filesDir, "tmp_shared").mkdirs()
@@ -75,7 +73,7 @@ class GalleryActivity : Activity() {
         outputStream.close()
         val shareIntent = Intent(Intent.ACTION_SEND)
         val uri =
-            Uri.parse("content://com.batodev.girlsadnadventures.highschoolmsg.model.ImagesProvider/$tmpImgPath")
+            Uri.parse("content://com.batodev.pinball.ImagesProvider/$tmpImgPath")
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
         shareIntent.type = "image/*"
         startActivity(shareIntent)

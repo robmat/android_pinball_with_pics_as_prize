@@ -30,6 +30,11 @@
         <activity android:name="com.dozingcatsoftware.bouncy.AboutActivity" />
         <activity android:name="com.dozingcatsoftware.bouncy.BouncyPreferences"/>
         <activity android:name=".GalleryActivity" />
+        <provider
+            android:authorities="com.batodev.pinball.ImagesProvider"
+            android:name="com.batodev.pinball.ImagesProvider"
+            android:exported="false"
+            android:grantUriPermissions="true" />
     </application>
 
 </manifest>

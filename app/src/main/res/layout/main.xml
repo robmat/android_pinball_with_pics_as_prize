@@ -165,7 +165,6 @@
                     android:padding="8dp"
                     android:onClick="showGallery"
                     android:background="@drawable/btn_background"
-                    android:focusableInTouchMode="true"
                     android:text="@string/show_gallery_button_label" />
 
                 <Button

@@ -97,7 +97,8 @@ public class ImageHelper {
         }
     }
 
-    private static String findPathForImage(AssetManager galleryActivity, @NonNull String imgName) {
+    @NotNull
+    public static String findPathForImage(AssetManager galleryActivity, @NonNull String imgName) {
         String imageFolder = IMG_PATHS.stream().filter(imgPath -> {
             try {
                 String[] list = galleryActivity.list(imgPath);
