@@ -76,8 +76,8 @@
     <string name="show_high_score_button_label">High scores</string>
     <string name="hide_high_score_button_label">OK</string>
     <string name="high_score_table_title">High scores</string>
-    <string name="image_unlocked_msg_10k">New image added to pictures gallery!</string>
     <string name="image_unlocked_msg_100k">A hidden image is unlocked!</string>
+    <string name="image_unlocked_msg_10k">New image added to the gallery!</string>
     <string name="back">Back</string>
     <string name="show_gallery_button_label">Gallery</string>
     <string name="play_the_game_to_unlock_pictures">Play the game first to unlock new pictures!</string>
