@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-    <string name="app_name" translatable="false">Vector Pinball</string>
 
     <string name="independent_flippers_pref_title">Palang Tersendiri</string>
     <string name="independent_flippers_pref_summary_on">Tekanan akan mengaktifkan palang pada sisi yang sama di layar</string>
@@ -69,4 +68,4 @@
     <string name="constellation_complete_message">%1$s terselesaikan</string>
 
 <string name="start_game_button_label">Memulai permainan</string><string name="resume_game_button_label">Melanjutkan permainan</string><string name="quit_button_label">Berhenti</string><string name="ball_saved_message">Bola Tersimpan</string><string name="no_high_scores_message">Tidak ada skor untuk tabel ini</string><string name="show_high_score_button_label">Nilai yang tinggi</string><string name="hide_high_score_button_label">OKE</string><string name="high_score_table_title">Nilai yang tinggi</string>
-    <string name="image_unlocked_msg_100k">Gambar tersembunyi tidak terkunci!</string><string name="back">Kembali</string><string name="show_gallery_button_label">Galeri</string><string name="play_the_game_to_unlock_pictures">Mainkan gamenya terlebih dahulu untuk membuka gambar baru!</string><string name="image_unlocked_msg_10k">Gambar baru ditambahkan ke galeri!</string></resources>
+    <string name="image_unlocked_msg_100k">Gambar tersembunyi tidak terkunci!</string><string name="back">Kembali</string><string name="show_gallery_button_label">Galeri</string><string name="play_the_game_to_unlock_pictures">Mainkan gamenya terlebih dahulu untuk membuka gambar baru!</string><string name="image_unlocked_msg_10k">Gambar baru ditambahkan ke galeri!</string><string name="app_name">Keindahan Pinball</string></resources>

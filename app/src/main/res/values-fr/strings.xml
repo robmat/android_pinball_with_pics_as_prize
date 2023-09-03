@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-    <string name="app_name" translatable="false">Vector Pinball</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
 
     <string name="independent_flippers_pref_title">Flippers indépendants</string>
     <string name="independent_flippers_pref_summary_on">Un appui active le flipper du même côté de l\'écran</string>
@@ -78,5 +78,15 @@
     <string name="shoot_ramp_jackpot_message">Tirer la Rampe pour la Jackpot</string>
     <string name="constellation_complete_message">%1$s compléter</string>
 
-<string name="quit_button_label">Quitter</string><string name="no_high_scores_message">Aucun score pour ce tableau</string><string name="show_high_score_button_label">Scores élevés</string><string name="hide_high_score_button_label">D'ACCORD</string><string name="high_score_table_title">Scores élevés</string>
-    <string name="image_unlocked_msg_100k">Une image cachée est déverrouillée !</string><string name="back">Dos</string><string name="show_gallery_button_label">Galerie</string><string name="play_the_game_to_unlock_pictures">Jouez d'abord au jeu pour débloquer de nouvelles images !</string><string name="image_unlocked_msg_10k">Nouvelle image ajoutée à la galerie !</string></resources>
+    <string name="quit_button_label">Quitter</string>
+    <string name="no_high_scores_message">Aucun score pour ce tableau</string>
+    <string name="show_high_score_button_label">Scores élevés</string>
+    <string name="hide_high_score_button_label">D\'ACCORD</string>
+    <string name="high_score_table_title">Scores élevés</string>
+    <string name="image_unlocked_msg_100k">Une image cachée est déverrouillée!</string>
+    <string name="back">Dos</string>
+    <string name="show_gallery_button_label">Galerie</string>
+    <string name="play_the_game_to_unlock_pictures">Jouez d\'abord au jeu pour débloquer de nouvelles images!</string>
+    <string name="image_unlocked_msg_10k">Nouvelle image ajoutée à la galerie !</string>
+    <string name="app_name">Beautés du flipper</string>
+</resources>
