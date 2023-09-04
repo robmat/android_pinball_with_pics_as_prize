@@ -173,7 +173,7 @@
     {
       "class": "FlipperElement",
       "downspeed": "3",
-      "length": "2.5",
+      "length": "2.6",
       "maxangle": "20",
       "minangle": "-20",
       "position": ["6.35", "2.2"],
@@ -182,7 +182,7 @@
     {
       "class": "FlipperElement",
       "downspeed": "3",
-      "length": "-2.5",
+      "length": "-2.6",
       "maxangle": "20",
       "minangle": "-20",
       "position": ["12.35", "2.2"],
@@ -228,7 +228,7 @@
     {
       "class": "FlipperElement",
       "downspeed": "3",
-      "length": "2.3",
+      "length": "2.4",
       "maxangle": "-18",
       "minangle": "-68",
       "position": [1.446666666666668, 18.353333333333328],
