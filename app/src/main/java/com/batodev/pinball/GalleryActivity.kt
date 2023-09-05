@@ -8,9 +8,12 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import com.github.chrisbanes.photoview.PhotoView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
-import java.io.InputStream
 import java.io.OutputStream
 
 class GalleryActivity : Activity() {
@@ -27,11 +30,12 @@ class GalleryActivity : Activity() {
     override fun onResume() {
         super.onResume()
         pics.clear()
-        pics.addAll(SettingsHelper(this).preferences.uncoveredPics)
+        val settingsHelper = SettingsHelper(this)
+        pics.addAll(settingsHelper.preferences.uncoveredPics)
         findViewById<PhotoView>(R.id.gallery_activity_background).setImageBitmap(
-            ImageHelper.findBitmap(pics[0], this)
+            ImageHelper.findBitmap(pics[settingsHelper.preferences.lastSeenGalleryPic], this)
         );
-        currentPic = pics[0]
+        currentPic = pics[settingsHelper.preferences.lastSeenGalleryPic]
     }
 
     fun leftClicked(view: View) {
@@ -41,9 +45,11 @@ class GalleryActivity : Activity() {
                 ImageHelper.findBitmap(pics[indexOf - 1], this)
             )
             currentPic = pics[indexOf - 1]
+            saveLastSeenPic(indexOf - 1)
         }
         showAD()
     }
+
 
     fun rightClicked(view: View) {
         val indexOf = pics.indexOf(currentPic)
@@ -52,8 +58,22 @@ class GalleryActivity : Activity() {
                 ImageHelper.findBitmap(pics[indexOf + 1], this)
             )
             currentPic = pics[indexOf + 1]
+            saveLastSeenPic(indexOf + 1)
         }
         showAD()
+    }
+
+    private fun saveLastSeenPic(indexOf: Int) {
+        val scope = CoroutineScope(Dispatchers.IO)
+        val settingsHelper = SettingsHelper(this)
+        scope.launch {
+            val result = async {
+                settingsHelper.preferences.lastSeenGalleryPic = indexOf
+                settingsHelper.savePreferences()
+            }
+            val data = result.await()
+            Log.d(GalleryActivity::class.java.simpleName, "$data")
+        }
     }
 
     private fun showAD() {
@@ -84,8 +104,7 @@ class GalleryActivity : Activity() {
         inputStream.close()
         outputStream.close()
         val shareIntent = Intent(Intent.ACTION_SEND)
-        val uri =
-            Uri.parse("content://com.batodev.pinball.ImagesProvider/$tmpImgPath")
+        val uri = Uri.parse("content://com.batodev.pinball.ImagesProvider/$tmpImgPath")
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
         shareIntent.type = "image/*"
         startActivity(shareIntent)

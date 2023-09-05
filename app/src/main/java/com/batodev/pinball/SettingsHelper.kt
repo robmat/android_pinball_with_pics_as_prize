@@ -16,19 +16,22 @@ class SettingsHelper(context: Context) {
     fun savePreferences() {
         val editor = sharedPreferences.edit()
         editor.putString("uncoveredPics", preferences.uncoveredPics.joinToString(","))
+        editor.putInt("lastSeenGalleryPic", preferences.lastSeenGalleryPic)
         editor.apply()
     }
 
     private fun loadPreferences(): Preferences {
-        val preferences = Preferences(mutableSetOf())
+        val preferences = Preferences(mutableListOf())
         preferences.uncoveredPics =
-            sharedPreferences.getString("uncoveredPics", "")?.split(",")?.toMutableSet()
-                ?: mutableSetOf()
-        preferences.uncoveredPics = preferences.uncoveredPics.filter { it != "" }.toMutableSet()
+            sharedPreferences.getString("uncoveredPics", "")?.split(",")?.toMutableList()
+                ?: mutableListOf()
+        preferences.uncoveredPics = preferences.uncoveredPics.filter { it != "" }.toMutableList()
+        preferences.lastSeenGalleryPic = sharedPreferences.getInt("lastSeenGalleryPic", 0)
         return preferences
     }
 }
 
 data class Preferences(
-    var uncoveredPics: MutableSet<String>,
+    var uncoveredPics: MutableList<String>,
+    var lastSeenGalleryPic: Int = 0
 )

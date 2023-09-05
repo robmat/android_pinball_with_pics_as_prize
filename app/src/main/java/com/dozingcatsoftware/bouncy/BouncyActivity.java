@@ -780,7 +780,9 @@ public class BouncyActivity extends Activity {
                 handler.post(() -> {
                     field.showGameMessage(getString(R.string.image_unlocked_msg_10k), 3000, true);
                     SettingsHelper settingsHelper = new SettingsHelper(BouncyActivity.this);
-                    settingsHelper.getPreferences().getUncoveredPics().add(prizeImageName);
+                    if (!settingsHelper.getPreferences().getUncoveredPics().contains(prizeImageName)) {
+                        settingsHelper.getPreferences().getUncoveredPics().add(prizeImageName);
+                    }
                     settingsHelper.savePreferences();
                 });
                 prizeImage10kWon = true;
@@ -796,7 +798,9 @@ public class BouncyActivity extends Activity {
                     background.setImageBitmap((Bitmap) stringObjectMap.get(ImageHelper.BITMAP));
                     this.prizeImageName = Objects.requireNonNull(stringObjectMap.get(ImageHelper.NAME)).toString();
                     SettingsHelper settingsHelper = new SettingsHelper(BouncyActivity.this);
-                    settingsHelper.getPreferences().getUncoveredPics().add(prizeImageName);
+                    if (!settingsHelper.getPreferences().getUncoveredPics().contains(prizeImageName)) {
+                        settingsHelper.getPreferences().getUncoveredPics().add(prizeImageName);
+                    }
                     settingsHelper.savePreferences();
                 });
                 prizeImage100kWon = true;
