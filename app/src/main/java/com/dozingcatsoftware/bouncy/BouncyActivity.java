@@ -433,7 +433,7 @@ public class BouncyActivity extends Activity {
 
     // Update settings from preferences, called at launch and when preferences activity finishes.
     void updateFromPreferences() {
-        SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("com.batodev.pinball_preferences", MODE_PRIVATE);
         fieldViewManager.setIndependentFlippers(prefs.getBoolean("independentFlippers", true));
         scoreView.setShowFPS(prefs.getBoolean("showFPS", false));
 
@@ -605,11 +605,7 @@ public class BouncyActivity extends Activity {
         SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(INITIAL_LEVEL_PREFS_KEY, level);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            editor.apply();
-        } else {
-            editor.commit();
-        }
+        editor.apply();
     }
 
     // Button action methods defined by android:onClick values in main.xml.

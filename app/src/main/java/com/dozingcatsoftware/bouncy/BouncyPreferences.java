@@ -13,20 +13,12 @@ import com.batodev.pinball.R;
 public class BouncyPreferences extends PreferenceActivity {
 
     private static boolean supportsMultitouch() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;
+        return true;
     }
 
     private static boolean supportsHapticFeedback(Context context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-            return false;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-            if (vibrator == null || !vibrator.hasVibrator()) {
-                return false;
-            }
-        }
-        return true;
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        return vibrator != null && vibrator.hasVibrator();
     }
 
     @Override protected void onCreate(Bundle savedInstanceState) {
