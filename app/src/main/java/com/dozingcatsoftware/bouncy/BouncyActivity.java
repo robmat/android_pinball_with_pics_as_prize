@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.badlogic.gdx.physics.box2d.Box2D;
+import com.batodev.pinball.AdHelper;
 import com.batodev.pinball.GalleryActivity;
 import com.batodev.pinball.ImageHelper;
 import com.batodev.pinball.R;
@@ -765,8 +766,12 @@ public class BouncyActivity extends Activity {
     }
 
     public void endGameListener() {
-        ImageView background = findViewById(R.id.background);
-        background.setVisibility(View.GONE);
+        Log.d(BouncyActivity.class.getSimpleName(), "endGameListener()");
+        handler.post(() -> {
+            ImageView background = findViewById(R.id.background);
+            background.setVisibility(View.GONE);
+            AdHelper.INSTANCE.showAd(BouncyActivity.this);
+        });
     }
 
     public void scoreListener(long score) {

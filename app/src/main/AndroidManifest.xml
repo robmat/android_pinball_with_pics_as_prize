@@ -35,6 +35,9 @@
             android:name="com.batodev.pinball.ImagesProvider"
             android:exported="false"
             android:grantUriPermissions="true" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="${MANIFEST_AD_ID}" />
     </application>
 
 </manifest>

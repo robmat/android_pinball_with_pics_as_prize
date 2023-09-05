@@ -22,6 +22,7 @@
         android:text="&lt;"
         android:textColor="@color/light_grey"
         android:textSize="30sp"
+        android:padding="8dp"
         app:layout_constraintLeft_toLeftOf="@id/gallery_activity_background" />
 
     <Button
@@ -33,6 +34,7 @@
         android:text="&gt;"
         android:textColor="@color/light_grey"
         android:textSize="30sp"
+        android:padding="8dp"
         app:layout_constraintRight_toRightOf="@id/gallery_activity_background" />
 
     <Button
@@ -40,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back"
+        android:padding="8dp"
         android:background="@drawable/btn_background"
         android:onClick="backClicked"
         android:textColor="@color/light_grey"
