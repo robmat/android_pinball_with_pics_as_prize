@@ -120,7 +120,7 @@ public class BouncyActivity extends Activity {
 
     private static final String TAG = "BouncyActivity";
     private String prizeImageName;
-    private boolean prizeImage10kWon = false, prizeImage100kWon = false;
+    private boolean prizeImage10kWon = false, prizeImage100kWon = false, prizeImage500kWon = false;
 
     /**
      * Called when the activity is first created.
@@ -800,6 +800,24 @@ public class BouncyActivity extends Activity {
                     settingsHelper.savePreferences();
                 });
                 prizeImage100kWon = true;
+            }
+        }
+        if (score >= 500_000L) {
+            if (!prizeImage500kWon) {
+                handler.post(() -> {
+                    field.showGameMessage(getString(R.string.image_unlocked_msg_100k), 3000, true);
+                    ImageView background = findViewById(R.id.background);
+                    background.setVisibility(View.VISIBLE);
+                    Map<String, Object> stringObjectMap = ImageHelper.random500kBitmap(BouncyActivity.this);
+                    background.setImageBitmap((Bitmap) stringObjectMap.get(ImageHelper.BITMAP));
+                    this.prizeImageName = Objects.requireNonNull(stringObjectMap.get(ImageHelper.NAME)).toString();
+                    SettingsHelper settingsHelper = new SettingsHelper(BouncyActivity.this);
+                    if (!settingsHelper.getPreferences().getUncoveredPics().contains(prizeImageName)) {
+                        settingsHelper.getPreferences().getUncoveredPics().add(prizeImageName);
+                    }
+                    settingsHelper.savePreferences();
+                });
+                prizeImage500kWon = true;
             }
         }
     }

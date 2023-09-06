@@ -33,3 +33,4 @@ google-services.json
 *.hprof
 /app/src/main/assets/prize-images-10k/
 /app/src/main/assets/prize-images-100k/
+/app/src/main/assets/prize-images-500k/

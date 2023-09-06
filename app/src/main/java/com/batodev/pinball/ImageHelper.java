@@ -32,6 +32,7 @@ public class ImageHelper {
 
     public static final String PRIZE_IMAGES_10_K = "prize-images-10k";
     public static final String PRIZE_IMAGES_100_K = "prize-images-100k";
+    public static final String PRIZE_IMAGES_500_K = "prize-images-500k";
     public static final String NAME = "name";
     public static final String BITMAP = "bitmap";
 
@@ -56,7 +57,7 @@ public class ImageHelper {
         return output;
     }
 
-    static List<String> IMG_PATHS = List.of(PRIZE_IMAGES_10_K, PRIZE_IMAGES_100_K);
+    static List<String> IMG_PATHS = List.of(PRIZE_IMAGES_10_K, PRIZE_IMAGES_100_K, PRIZE_IMAGES_500_K);
 
     public static Map<String, Object> random10kBitmap(BouncyActivity bouncyActivity) {
         return pickImage(bouncyActivity, PRIZE_IMAGES_10_K);
@@ -110,5 +111,9 @@ public class ImageHelper {
             }
         }).findAny().orElseThrow(() -> new IllegalStateException("Uncovered image " + imgName + " is nowhere to found?"));
         return imageFolder;
+    }
+
+    public static Map<String, Object> random500kBitmap(BouncyActivity bouncyActivity) {
+        return pickImage(bouncyActivity, PRIZE_IMAGES_500_K);
     }
 }
