@@ -463,7 +463,7 @@ public class BouncyActivity extends Activity {
             }
         }
 
-        useZoom = prefs.getBoolean("zoom", true);
+        useZoom = prefs.getBoolean("zoom", false);
         fieldViewManager.setZoom(useZoom ? ZOOM_FACTOR : 1.0f);
 
         VPSoundpool.setSoundEnabled(prefs.getBoolean("sound", true));
