@@ -81,5 +81,5 @@
     <string name="back">Back</string>
     <string name="show_gallery_button_label">Gallery</string>
     <string name="play_the_game_to_unlock_pictures">Play the game first to unlock new pictures!</string>
-
+    <string name="more_games_button_label">More games</string>
 </resources>

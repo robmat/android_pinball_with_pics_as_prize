@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -78,6 +79,8 @@ public class BouncyActivity extends Activity {
     Button aboutButton;
     Button preferencesButton;
     Button quitButton;
+    Button moreGamnesButton;
+    Button galleryButton;
     Button showHighScoreButton;
     Button hideHighScoreButton;
     CheckBox unlimitedBallsToggle;
@@ -185,6 +188,8 @@ public class BouncyActivity extends Activity {
         aboutButton = findViewById(R.id.aboutButton);
         preferencesButton = findViewById(R.id.preferencesButton);
         quitButton = findViewById(R.id.quitButton);
+        moreGamnesButton = findViewById(R.id.moreGamesButton);
+        galleryButton = findViewById(R.id.galleryButton);
         unlimitedBallsToggle = findViewById(R.id.unlimitedBallsToggle);
         showHighScoreButton = findViewById(R.id.highScoreButton);
         hideHighScoreButton = findViewById(R.id.hideHighScoreButton);
@@ -202,7 +207,7 @@ public class BouncyActivity extends Activity {
         // so we have to set a touch listener and call `performClick` on a ACTION_UP event
         // (after checking that the event was within the button bounds). This is likely
         // fragile but seems to be working ok.
-        List<View> allButtons = Arrays.asList(nextTableButton, previousTableButton, startGameButton, resumeGameButton, endGameButton, aboutButton, preferencesButton, quitButton, unlimitedBallsToggle, showHighScoreButton, hideHighScoreButton);
+        List<View> allButtons = Arrays.asList(nextTableButton, previousTableButton, startGameButton, resumeGameButton, endGameButton, aboutButton, preferencesButton, quitButton, galleryButton, unlimitedBallsToggle, showHighScoreButton, hideHighScoreButton, moreGamnesButton);
         for (View button : allButtons) {
             button.setOnTouchListener((view, motionEvent) -> {
                 // Log.i(TAG, "Button motion event: " + motionEvent);
@@ -722,9 +727,14 @@ public class BouncyActivity extends Activity {
             Toast.makeText(this, R.string.play_the_game_to_unlock_pictures, Toast.LENGTH_LONG).show();
         }
     }
+
     public void hideHighScore(View view) {
         showingHighScores = false;
         updateButtons();
+    }
+
+    public void showEmberfox(View v) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=8228670503574649511")));
     }
 
     private void fillHighScoreAdapter() {

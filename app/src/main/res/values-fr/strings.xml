@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="independent_flippers_pref_title">Flippers indépendants</string>
     <string name="independent_flippers_pref_summary_on">Un appui active le flipper du même côté de l\'écran</string>
@@ -89,4 +88,4 @@
     <string name="image_unlocked_msg_10k">Nouvelle image ajoutée à la galerie !</string>
     <string name="app_name">Beautés du flipper</string>
     <string name="about_text">Pinball Beauties 1.0.0, travail basé sur Vector Pinball 1.12.1\n© 2010–2023 Brian Nenninger\n\nCommentaires et rapports de bugs :\nemailimappop3test@gmail.com\n\nhttps://github.com/robmat/android_pinball_with_pics_as_prize \n\nTouchez l\'écran pour démarrer une nouvelle partie, lancez une balle si elle n\'est pas en jeu et activez les flippers. Touchez la zone de score pour mettre le jeu en pause.\n\n[TABLE_RULES]\n\nL\'élément de menu Préférences vous permet de modifier les paramètres suivants:\n- Son: active et désactive les effets sonores.\n- Musique de fond: active et musique de fond désactivée.\n- Retour haptique: vibre lors des coups de pare-chocs et d\'autres événements de jeu.\n- Flippers indépendants: lorsque cette case n\'est pas cochée, toute pression active les deux flippers. Lorsque cette case est cochée, vous devez toucher le côté gauche de l\'écran pour le flipper gauche et le côté droit pour le flipper droit.\n- Zoom : Lorsque cette case est cochée, la vue zoomera sur l\'emplacement de la balle pendant le jeu.\ n- Rendu OpenGL : utilise OpenGL pour dessiner des graphiques. Cela offre généralement la meilleure combinaison de qualité graphique et de performances, mais certains appareils peuvent faire mieux avec cette option désactivée.\n- Afficher les FPS : lorsque cette case est cochée, affiche les images dessinées par seconde en haut à gauche.\n\nVector Pinball est open source ; le code est sur\nhttps://github.com/dozingcat/Vector-Pinball\n\nMerci à Mario Zechner pour les améliorations du code et libgdx.\n\nsson, musique et code audio, par pdx\nTwittering Machine\nhttps : //www.twittering.com</string>
-</resources>
+<string name="more_games_button_label">Plus de jeux</string></resources>

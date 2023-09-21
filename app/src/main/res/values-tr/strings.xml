@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="independent_flippers_pref_title">Ayrık Kollar</string>
     <string name="independent_flippers_pref_summary_on">Sağa dokunuş sağdaki kolları, sola dokunuş soldaki kolları hareket ettirir</string>
@@ -82,4 +81,4 @@
     <string name="image_unlocked_msg_10k">Galeriye yeni resim eklendi!</string>
     <string name="app_name">Langırt Güzellikleri</string>
     <string name="about_text">Pinball Beauties 1.0.0, Vector Pinball 1.12.1\'e dayalı çalışma\n© 2010–2023 Brian Nenninger\n\nYorumlar ve hata raporları:\nemailimappop3test@gmail.com\n\nhttps://github.com/robmat/android_pinball_with_pics_as_prize \n\nYeni bir oyuna başlamak için ekrana dokunun, oyunda değilse topu fırlatın ve paletleri etkinleştirin. Oyunu duraklatmak için puan alanına dokunun.\n\n[TABLE_RULES]\n\nTercihler menü öğesi aşağıdaki ayarları değiştirmenizi sağlar:\n- Ses: Ses efektlerini etkinleştirir ve devre dışı bırakır.\n- Fon Müziği: Etkinleştirir ve devre dışı bırakır arka plan müziği devre dışı bırakıldı.\n- Dokunsal Geribildirim: Tampon vuruşlarında ve diğer oyun etkinliklerinde titreşir.\n- Bağımsız Kanatlar: İşaretlenmediğinde, herhangi bir dokunuş her iki kanatçığı da etkinleştirir. İşaretlendiğinde, sol kanatçık için ekranın sol tarafına, sağ kanatçık için ise sağ tarafına dokunmanız gerekir.\n- Yakınlaştırma: İşaretlendiğinde görünüm, oyun sırasında topun konumuna yakınlaştırılır.\ n- OpenGL Rendering: Grafik çizmek için OpenGL\'yi kullanır. Bu genellikle en iyi grafik kalitesi ve performans kombinasyonunu sağlar, ancak bazı cihazlar devre dışı bırakıldığında daha iyi sonuç verebilir.\n- FPS\'yi Göster: İşaretlendiğinde, sol üstte saniyede çizilen kareleri gösterir.\n\nVector Pinball açık kaynaktır; kod şu adrestedir:\nhttps://github.com/dozingcat/Vector-Pinball\n\nKod iyileştirmeleri ve libgdx için Mario Zechner\'a teşekkürler.\n\nses, müzik ve ses kodu, pdx tarafından\nTwittering Machine\nhttps: //www.twittering.com</string>
-</resources>
+<string name="more_games_button_label">Daha fazla oyun</string></resources>

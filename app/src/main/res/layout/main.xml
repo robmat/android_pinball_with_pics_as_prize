@@ -164,8 +164,20 @@
                     android:layout_marginBottom="8dp"
                     android:padding="8dp"
                     android:onClick="showGallery"
+                    android:focusableInTouchMode="true"
                     android:background="@drawable/btn_background"
                     android:text="@string/show_gallery_button_label" />
+
+                <Button
+                    android:id="@+id/moreGamesButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:padding="8dp"
+                    android:onClick="showEmberfox"
+                    android:focusableInTouchMode="true"
+                    android:background="@drawable/btn_background"
+                    android:text="@string/more_games_button_label" />
 
                 <Button
                     android:id="@+id/highScoreButton"
