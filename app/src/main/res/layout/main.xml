@@ -43,14 +43,14 @@
 			android:id="@+id/canvasFieldView"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
-			android:defaultFocusHighlightEnabled="false"
+            android:layout_marginBottom="60dp"
 			android:visibility="gone" />
 
 		<com.dozingcatsoftware.bouncy.GLFieldView
 			android:id="@+id/glFieldView"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
-			android:defaultFocusHighlightEnabled="false"
+            android:layout_marginBottom="60dp"
 			android:visibility="gone" />
 
         <ImageView
@@ -58,8 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="0.25"
-            tools:targetApi="honeycomb"
             android:scaleType="fitCenter"
+            android:layout_marginBottom="60dp"
             android:contentDescription="@string/app_name" />
 
         <LinearLayout
@@ -275,6 +275,16 @@
                 android:text="@string/hide_high_score_button_label" />
 
         </TableLayout>
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-9667420067790140/5791988312">
+        </com.google.android.gms.ads.AdView>
 
     </FrameLayout>
 
