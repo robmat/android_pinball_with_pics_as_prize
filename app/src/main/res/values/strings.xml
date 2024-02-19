@@ -82,4 +82,9 @@
     <string name="show_gallery_button_label">Gallery</string>
     <string name="play_the_game_to_unlock_pictures">Play the game first to unlock new pictures!</string>
     <string name="more_games_button_label">More games</string>
+    <string name="rate_this_app">If you liked this app, rate it!</string>
+    <string name="we_will_stop_showing_ads">As a sign of gratitude we will show a bit less ads.</string>
+    <string name="rate_this_app_now">Rate this app now!</string>
+    <string name="rate_this_app_later">Rate this app later.</string>
+    <string name="rate_this_app_never">Do not rate this app at all.</string>
 </resources>
