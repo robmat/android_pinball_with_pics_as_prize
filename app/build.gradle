@@ -29,8 +29,8 @@ android {
         applicationId "com.batodev.pinball"
         minSdkVersion 19
         targetSdkVersion 34
-        versionCode 39
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.1.0"
         multiDexEnabled true
         buildConfigField(
                 "String",
