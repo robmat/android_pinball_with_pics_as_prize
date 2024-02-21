@@ -30,6 +30,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.batodev.pinball.AdHelper;
 import com.batodev.pinball.GalleryActivity;
@@ -42,6 +44,13 @@ import com.dozingcatsoftware.vectorpinball.model.FieldDriver;
 import com.dozingcatsoftware.vectorpinball.model.GameState;
 import com.dozingcatsoftware.vectorpinball.model.IStringResolver;
 import com.dozingcatsoftware.vectorpinball.util.IOUtils;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -132,6 +141,14 @@ public class BouncyActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+                Log.d(TAG, "onInitializationComplete: " + initializationStatus);
+                Log.d(TAG, "onInitializationComplete: " + initializationStatus.getAdapterStatusMap());
+            }
+        });
+
         AdHelper.INSTANCE.loadAd(this);
         String arch = System.getProperty("os.arch");
         Log.i(TAG, "App started, os.arch: " + arch + ", API level: " + Build.VERSION.SDK_INT);
@@ -275,6 +292,58 @@ public class BouncyActivity extends Activity {
         // Reset frame rate since app or system settings that affect performance could have changed.
         fieldDriver.resetFrameRate();
         updateButtons();
+        loadBannerAd();
+    }
+
+    private void loadBannerAd() {
+        AdView adView = findViewById(R.id.adView);
+        adView.bringToFront();
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+                Log.d(TAG, "onAdClicked");
+            }
+
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                Log.d(TAG, "onAdClosed");
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+                Log.w(TAG, "onAdFailedToLoad: " + loadAdError);
+                Log.w(TAG, "onAdFailedToLoad: " + loadAdError.getResponseInfo());
+            }
+
+            @Override
+            public void onAdImpression() {
+                super.onAdImpression();
+                Log.d(TAG, "onAdImpression");
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                Log.d(TAG, "onAdLoaded");
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+                Log.d(TAG, "onAdOpened");
+            }
+
+            @Override
+            public void onAdSwipeGestureClicked() {
+                super.onAdSwipeGestureClicked();
+                Log.d(TAG, "onAdSwipeGestureClicked");
+            }
+        });
+        adView.loadAd(adRequest);
     }
 
     @Override
@@ -762,6 +831,7 @@ public class BouncyActivity extends Activity {
             background.setVisibility(View.GONE);
             AdHelper.INSTANCE.showAddIfNeeded(BouncyActivity.this);
             RateAppHelper.INSTANCE.increaseRateAppCounterAndShowDialogIfApplicable(this);
+            loadBannerAd();
         });
     }
 
