@@ -1,17 +1,17 @@
 package com.batodev.pinball
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupWindow
 import androidx.core.content.edit
+import com.google.android.play.core.review.ReviewException
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.play.core.review.model.ReviewErrorCode
 
 
 private const val WHEN_TO_SHOW_APP_RATE_POPUP = "WHEN_TO_SHOW_APP_RATE_POPUP"
@@ -52,11 +52,25 @@ object RateAppHelper {
         val btnRateNow = popupView.findViewById<Button>(R.id.btnRateNow)
         btnRateNow.setOnClickListener {
             onNeverPressed(prefs)
-            val appPackageName = activity.packageName
-            try {
-                activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
-            } catch (e: ActivityNotFoundException) {
-                activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")))
+//            val manager = FakeReviewManager(activity)
+            val manager = ReviewManagerFactory.create(activity)
+            val request = manager.requestReviewFlow()
+            request.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val reviewInfo = task.result
+                    val flow = manager.launchReviewFlow(activity, reviewInfo)
+                    flow.addOnCompleteListener { _ ->
+                        // The flow has finished. The API does not indicate whether the user
+                        // reviewed or not, or even whether the review dialog was shown. Thus, no
+                        // matter the result, we continue our app flow.
+                        Log.d(RateAppHelper.javaClass.simpleName, "Review ok")
+                    }
+
+                } else {
+                    // There was some problem, log or handle the error code.
+                    @ReviewErrorCode val reviewErrorCode = (task.exception as ReviewException).errorCode
+                    Log.d(RateAppHelper.javaClass.simpleName, "Review error: $reviewErrorCode")
+                }
             }
             popupWindow.dismiss()
             prefs.edit {
