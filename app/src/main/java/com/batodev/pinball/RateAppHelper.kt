@@ -40,7 +40,7 @@ object RateAppHelper {
         }
     }
 
-    private fun showRateAppPopup(activity: Activity, prefs: SharedPreferences) {
+    fun showRateAppPopup(activity: Activity, prefs: SharedPreferences) {
         val inflater = activity.layoutInflater
         val popupView = inflater.inflate(R.layout.popup_rate_app, activity.findViewById(R.id.main), false)
         val popupWindow = PopupWindow(
@@ -52,7 +52,6 @@ object RateAppHelper {
         val btnRateNow = popupView.findViewById<Button>(R.id.btnRateNow)
         btnRateNow.setOnClickListener {
             onNeverPressed(prefs)
-//            val manager = FakeReviewManager(activity)
             val manager = ReviewManagerFactory.create(activity)
             val request = manager.requestReviewFlow()
             request.addOnCompleteListener { task ->

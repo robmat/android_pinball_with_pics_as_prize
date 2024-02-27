@@ -214,6 +214,17 @@
                     android:text="@string/preferences_button_label" />
 
                 <Button
+                    android:id="@+id/rate_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:onClick="rateApp"
+                    android:padding="8dp"
+                    android:background="@drawable/btn_background"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/rate_this_app" />
+
+                <Button
                     android:id="@+id/quitButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

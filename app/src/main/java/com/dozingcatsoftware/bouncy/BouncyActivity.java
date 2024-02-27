@@ -1,6 +1,7 @@
 package com.dozingcatsoftware.bouncy;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -885,5 +886,9 @@ public class BouncyActivity extends Activity {
                 prizeImage500kWon = true;
             }
         }
+    }
+
+    public void rateApp(View view) {
+        RateAppHelper.INSTANCE.showRateAppPopup(this, getSharedPreferences(RateAppHelper.class.getSimpleName(), Context.MODE_PRIVATE));
     }
 }
