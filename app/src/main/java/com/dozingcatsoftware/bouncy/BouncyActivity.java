@@ -298,7 +298,6 @@ public class BouncyActivity extends Activity {
 
     private void loadBannerAd() {
         AdView adView = findViewById(R.id.adView);
-        adView.bringToFront();
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.setAdListener(new AdListener() {
             @Override
