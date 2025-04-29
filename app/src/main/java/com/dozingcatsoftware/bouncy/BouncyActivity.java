@@ -32,6 +32,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.batodev.pinball.AdHelper;
@@ -155,11 +158,14 @@ public class BouncyActivity extends Activity {
         Log.i(TAG, "App started, os.arch: " + arch + ", API level: " + Build.VERSION.SDK_INT);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(this.getWindow(), this.getWindow().getDecorView());
+        // Hide both bars
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
+        // Sticky behavior - bars stay hidden until user swipes
+        windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         setContentView(R.layout.main);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.getWindow().setNavigationBarColor(Color.BLACK);
-        }
+        this.getWindow().setNavigationBarColor(Color.BLACK);
 
         this.numberOfLevels = FieldLayoutReader.getNumberOfLevels(this);
         this.currentLevel = getInitialLevel();
@@ -587,7 +593,7 @@ public class BouncyActivity extends Activity {
     List<Long> highScoresFromPreferences(int theLevel) {
         SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
         String scoresAsString = prefs.getString(highScorePrefsKeyForLevel(theLevel), "");
-        if (scoresAsString.length() > 0) {
+        if (!scoresAsString.isEmpty()) {
             try {
                 String[] fields = scoresAsString.split(",");
                 List<Long> scores = new ArrayList<>();
@@ -774,7 +780,7 @@ public class BouncyActivity extends Activity {
     }
 
     public void showGallery(View view) {
-        if (new SettingsHelper(this).getPreferences().getUncoveredPics().size() > 0) {
+        if (!new SettingsHelper(this).getPreferences().getUncoveredPics().isEmpty()) {
             startActivity(new Intent(this, GalleryActivity.class));
         } else {
             Toast.makeText(this, R.string.play_the_game_to_unlock_pictures, Toast.LENGTH_LONG).show();

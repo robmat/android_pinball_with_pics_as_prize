@@ -68,4 +68,21 @@
         android:contentDescription="@string/app_name"
         android:translationZ="99dp"
         tools:ignore="UsingOnClickInXml" />
+
+    <ImageButton
+        android:id="@+id/gallery_wallpaper_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_wallpaper_36dp"
+        android:background="@drawable/btn_background"
+        android:onClick="wallpaperClicked"
+        android:textColor="@color/light_grey"
+        app:layout_constraintRight_toLeftOf="@id/gallery_share_btn"
+        app:layout_constraintBottom_toBottomOf="@id/gallery_activity_background"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/app_name"
+        android:translationZ="99dp"
+        tools:ignore="UsingOnClickInXml" />
 </androidx.constraintlayout.widget.ConstraintLayout>
