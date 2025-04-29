@@ -87,4 +87,5 @@
     <string name="rate_this_app_now">Rate this app now!</string>
     <string name="rate_this_app_later">Rate this app later.</string>
     <string name="rate_this_app_never">Do not rate this app at all.</string>
+    <string name="wallpaper_ok">The picture has been set as your wallpaper</string>
 </resources>
