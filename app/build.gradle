@@ -98,7 +98,7 @@ configurations { natives }
 // libgdx native libraries are copied to libs/ by the copyAndroidNatives task.
 dependencies {
     implementation 'androidx.core:core-ktx:1.19.0'
-    implementation 'androidx.appcompat:appcompat:1.8.0-alpha01'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'com.google.android.material:material:1.14.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
