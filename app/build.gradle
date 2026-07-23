@@ -18,7 +18,7 @@ def versionProps = new Properties()
 file("version.properties").withInputStream { versionProps.load(it) }
 
 android {
-    compileSdk = 36
+    compileSdk = 37
 
     compileOptions {
         coreLibraryDesugaringEnabled true
@@ -33,7 +33,7 @@ android {
     defaultConfig {
         applicationId "com.batodev.pinball"
         minSdkVersion 23
-        targetSdkVersion 36
+        targetSdkVersion 37
         versionCode versionProps.getProperty("versionCode").toInteger()
         versionName versionProps.getProperty("versionName")
         multiDexEnabled true
