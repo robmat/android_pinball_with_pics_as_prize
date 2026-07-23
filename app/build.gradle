@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.github.triplet.play'
     id 'com.batodev.releasetools'
+    id 'com.github.ben-manes.versions'
+    id 'se.patrikerdes.use-latest-versions'
 }
 
 def localProperties = new Properties()
@@ -95,14 +97,14 @@ configurations { natives }
 
 // libgdx native libraries are copied to libs/ by the copyAndroidNatives task.
 dependencies {
-    implementation 'androidx.core:core-ktx:1.17.0'
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'com.google.android.material:material:1.13.0'
+    implementation 'androidx.core:core-ktx:1.19.0'
+    implementation 'androidx.appcompat:appcompat:1.8.0-alpha01'
+    implementation 'com.google.android.material:material:1.14.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
     implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-    implementation "com.google.android.gms:play-services-ads:24.6.0"
+    implementation "com.google.android.gms:play-services-ads:25.4.0"
     implementation 'com.google.android.play:review:2.0.2'
     implementation 'com.google.android.play:review-ktx:2.0.2'
     natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
