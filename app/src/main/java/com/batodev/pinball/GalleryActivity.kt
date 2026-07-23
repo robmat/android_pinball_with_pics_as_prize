@@ -118,6 +118,8 @@ class GalleryActivity : Activity() {
         val shareIntent = Intent(Intent.ACTION_SEND)
         val uri = "content://com.batodev.pinball.ImagesProvider/$tmpImgPath".toUri()
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+        shareIntent.clipData = android.content.ClipData.newRawUri("", uri)
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         shareIntent.type = "image/*"
         startActivity(shareIntent)
     }
