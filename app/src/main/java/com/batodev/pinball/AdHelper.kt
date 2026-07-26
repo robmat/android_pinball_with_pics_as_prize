@@ -4,17 +4,15 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import androidx.core.content.edit
-import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
 private const val AD_ID = BuildConfig.AD_HELPER_AD_ID
 var ad: InterstitialAd? = null
-const val AD_COUNTER= "AD_COUNTER"
-const val WHEN_TO_SHOW_ADS= "WHEN_TO_SHOW_ADS"
+const val AD_COUNTER = "AD_COUNTER"
+const val WHEN_TO_SHOW_ADS = "WHEN_TO_SHOW_ADS"
 
 object AdHelper {
     fun showAddIfNeeded(activity: Activity) {
@@ -45,7 +43,10 @@ object AdHelper {
     fun loadAd(activity: Activity) {
         val adRequest: AdRequest = AdRequest.Builder().build()
 
-        InterstitialAd.load(activity, AD_ID, adRequest,
+        InterstitialAd.load(
+            activity,
+            AD_ID,
+            adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     // The mInterstitialAd reference will be null until
@@ -58,6 +59,7 @@ object AdHelper {
                     // Handle the error
                     Log.w(AdHelper::class.simpleName, "onAdFailedToLoad: $loadAdError")
                 }
-            })
+            }
+        )
     }
 }

@@ -1,11 +1,9 @@
 package com.dozingcatsoftware.bouncy;
 
-import android.annotation.TargetApi;
 import android.graphics.PixelFormat;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
-import android.os.Build;
 
 import com.dozingcatsoftware.bouncy.util.TrigLookupTable;
 import com.dozingcatsoftware.vectorpinball.model.Color;
@@ -20,7 +18,6 @@ import java.util.function.Function;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 public class GL20Renderer implements IFieldRenderer.FloatOnlyRenderer, GLSurfaceView.Renderer {
     static final double TAU = 2 * Math.PI;
 

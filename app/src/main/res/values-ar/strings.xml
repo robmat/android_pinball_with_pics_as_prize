@@ -79,4 +79,7 @@
   <string name="rate_this_app_later">قم بتقييم هذا التطبيق لاحقًا.</string>
   <string name="rate_this_app_never">لا تقيم هذا التطبيق على الإطلاق.</string>
   <string name="wallpaper_ok">لقد تم تعيين الصورة كخلفية لجهازك</string>
+    <string name="previous_table_content_description">الجدول السابق</string>
+    <string name="next_table_content_description">الجدول التالي</string>
+    <string name="game_paused_content_description">اللعبة متوقفة مؤقتًا</string>
 </resources>

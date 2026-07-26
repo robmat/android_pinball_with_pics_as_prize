@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -21,9 +22,14 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
-import androidx.core.net.toUri
 
 class GalleryActivity : Activity() {
+    companion object {
+        private const val SCROLL_AD_THRESHOLD = 3
+        private const val COPY_BUFFER_SIZE = 1024
+        private const val JPEG_COMPRESS_QUALITY = 100
+    }
+
     val pics = mutableListOf<String>()
     var currentPic = ""
     var scrollCount = 0
@@ -62,7 +68,6 @@ class GalleryActivity : Activity() {
         showAD()
     }
 
-
     fun rightClicked(view: View) {
         val indexOf = pics.indexOf(currentPic)
         if (indexOf < pics.size - 1) {
@@ -90,7 +95,7 @@ class GalleryActivity : Activity() {
 
     private fun showAD() {
         Log.d(GalleryActivity::class.java.simpleName, "Showing ad.")
-        if (++scrollCount >= 3) {
+        if (++scrollCount >= SCROLL_AD_THRESHOLD) {
             AdHelper.showAd(this)
             scrollCount = 0
         }
@@ -102,13 +107,13 @@ class GalleryActivity : Activity() {
 
     fun shareClicked(view: View) {
         val imgFolder = ImageHelper.findPathForImage(this.assets, currentPic)
-        val inputStream = assets.open("${imgFolder}${File.separator}${currentPic}")
+        val inputStream = assets.open("${imgFolder}${File.separator}$currentPic")
         val tmpImgPath = "tmp_shared/tmp.png"
         val file = File(filesDir, tmpImgPath)
         File(filesDir, "tmp_shared").mkdirs()
         file.delete()
         val outputStream: OutputStream = FileOutputStream(file)
-        val buffer = ByteArray(1024)
+        val buffer = ByteArray(COPY_BUFFER_SIZE)
         var bytesRead: Int
         while (inputStream.read(buffer).also { bytesRead = it } != -1) {
             outputStream.write(buffer, 0, bytesRead)
@@ -125,16 +130,15 @@ class GalleryActivity : Activity() {
     }
 
     fun wallpaperClicked(view: View) {
-
         try {
             val fileShared = copyToTempFile()
             val wallpaperManager = WallpaperManager.getInstance(this)
             val bitmap = BitmapFactory.decodeFile(fileShared.absolutePath)
             wallpaperManager.setBitmap(bitmap)
             Toast.makeText(this, getString(R.string.wallpaper_ok), Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
+        } catch (e: java.io.IOException) {
             Log.e(GalleryActivity::class.java.simpleName, "Błąd podczas ustawiania tapety", e)
-            Toast.makeText(this, "Error: $e" , Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error: $e", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -150,7 +154,7 @@ class GalleryActivity : Activity() {
         }
         fileShared.createNewFile()
         FileOutputStream(fileShared).use {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, JPEG_COMPRESS_QUALITY, it)
             it.flush()
         }
         return fileShared

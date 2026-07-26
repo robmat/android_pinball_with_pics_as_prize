@@ -2,7 +2,7 @@ package com.batodev.pinball
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
+import androidx.core.content.edit
 
 class SettingsHelper(context: Context) {
     private val sharedPreferences: SharedPreferences
@@ -14,10 +14,10 @@ class SettingsHelper(context: Context) {
     }
 
     fun savePreferences() {
-        val editor = sharedPreferences.edit()
-        editor.putString("uncoveredPics", preferences.uncoveredPics.joinToString(","))
-        editor.putInt("lastSeenGalleryPic", preferences.lastSeenGalleryPic)
-        editor.apply()
+        sharedPreferences.edit {
+            putString("uncoveredPics", preferences.uncoveredPics.joinToString(","))
+            putInt("lastSeenGalleryPic", preferences.lastSeenGalleryPic)
+        }
     }
 
     private fun loadPreferences(): Preferences {

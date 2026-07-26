@@ -205,7 +205,6 @@
     
   <string name="image_unlocked_msg_10k">Nova bildo aldonita al la galerio!</string>
     
-  <string name="app_name">Fliperaj Belecoj</string>
     
   <string name="about_text">Pinball Beauties 1.0.0, laboro bazita sur Vector Pinball 1.12.1\n© 2010–2023 Brian Nenninger\n\nKomentoj kaj cimraportoj:\nemailimappop3test@gmail.com\n\nhttps://github.com/robmat/android_pinball_with_pics_as_prize \n\nTuŝu la ekranon por komenci novan ludon, lanĉi pilkon se oni ne ludas, kaj aktivigu la naĝilojn. Tuŝu la poentaran areon por paŭzi la ludon.\n\n[TABLE_RULES]\n\nLa menuero Preferoj permesas ŝanĝi la sekvajn agordojn:\n- Sono: Ebligas kaj malŝaltas sonefektojn.\n- Fona Muziko: Ebligas kaj malŝaltita fona muziko.\n- Haptika Reago: Vibras ĉe bufrotrafoj kaj aliaj ludaj eventoj.\n- Sendependaj Naĝiloj: Se nemarkite, ajna tuŝo aktivigas ambaŭ naĝilojn. Kiam vi markita, vi devas tuŝi la maldekstran flankon de la ekrano por la maldekstra naĝilo, kaj la dekstran flankon por la dekstra naĝilo.\n- Zomi: Kiam ĝi estas markita, la vido zomos la lokon de la pilko dum la ludado.\ n- OpenGL Rendering: Uzas OpenGL por desegni grafikaĵojn. Ĉi tio kutime provizas la plej bonan kombinaĵon de grafika kvalito kaj rendimento, sed iuj aparatoj povas fari pli bone kun ĝi malŝaltita.\n- Montri FPS: Kiam ĝi estas kontrolita, montras kadrojn desegnitajn je sekundo en la supra maldekstro.\n\nVector Pinball estas malfermfonta; la kodo estas ĉe\nhttps://github.com/dozingcat/Vector-Pinball\n\nDankon al Mario Zechner pro kodaj plibonigoj kaj libgdx.\n\nsona, muziko kaj sonkodo, per pdx\nTwittering Machine\nhttps: //www.twittering.com</string>
     
@@ -222,4 +221,7 @@
   <string name="rate_this_app_never">Tute ne taksu ĉi tiun apon.</string>
   
   <string name="wallpaper_ok">La bildo estas agordita kiel via fonbildo</string>
+    <string name="previous_table_content_description">Antaŭa tablo</string>
+    <string name="next_table_content_description">Sekva tablo</string>
+    <string name="game_paused_content_description">Ludo paŭzigita</string>
 </resources>

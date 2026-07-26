@@ -3,6 +3,7 @@ package com.dozingcatsoftware.bouncy;
 import com.batodev.pinball.R;
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -132,7 +133,7 @@ public class ScoreView extends View {
                 width / 2.0f - textRect.width() / 2.0f, height / 2.0f + textRect.height() / 3.0f,
                 textPaint);
         if (showFPS && fps > 0) {
-            c.drawText(String.format("%.1f fps", fps), 16 * metrics.density, height * 0.25f, fpsPaint);
+            c.drawText(String.format(Locale.US, "%.1f fps", fps), 16 * metrics.density, height * 0.25f, fpsPaint);
         }
         if (debugMessage != null) {
             c.drawText(debugMessage, width * 0.02f, height * 0.75f, fpsPaint);
@@ -169,7 +170,7 @@ public class ScoreView extends View {
             if (multiplier > 1) {
                 int intValue = (int) multiplier;
                 String multiplierString = (multiplier == intValue) ?
-                        intValue + "x" : String.format("%.2fx", multiplier);
+                        intValue + "x" : String.format(Locale.US, "%.2fx", multiplier);
                 float messageStartX = ballRightmostCenterX - 2 * distanceBetweenBallCenters - ballRadius;
                 c.drawText(multiplierString, messageStartX, height * 0.4f, multiplierPaint);
             }

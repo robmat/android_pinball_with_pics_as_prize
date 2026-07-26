@@ -225,6 +225,7 @@ public class VPSoundpool {
         drumbass = null;
         androidpad.release();
         androidpad = null;
+        mContext = null;
         Log.v(LOG_TAG, "cleanup finished");
     }
 

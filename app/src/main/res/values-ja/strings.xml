@@ -79,4 +79,7 @@
   <string name="rate_this_app_later">後でこのアプリを評価してください。</string>
   <string name="rate_this_app_never">このアプリを一切評価しないでください。</string>
   <string name="wallpaper_ok">この写真は壁紙に設定されました</string>
+    <string name="previous_table_content_description">前のテーブル</string>
+    <string name="next_table_content_description">次のテーブル</string>
+    <string name="game_paused_content_description">ゲーム一時停止中</string>
 </resources>

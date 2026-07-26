@@ -1,6 +1,7 @@
 package com.dozingcatsoftware.vectorpinball.util;
 
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.function.LongSupplier;
 
 /**
@@ -183,7 +184,7 @@ public class FrameRateManager {
      * whether the rate is locked.
      */
     public String fpsDebugInfo() {
-        return String.format("FPS: %.1f target: %.1f %s",
+        return String.format(Locale.US, "FPS: %.1f target: %.1f %s",
                 currentFPS, targetFramesPerSecond(), (frameRateLocked) ? "(locked)" : "");
     }
 

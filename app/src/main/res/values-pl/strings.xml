@@ -205,7 +205,6 @@
     
   <string name="image_unlocked_msg_10k">Nowe zdjęcie dodane do galerii!</string>
     
-  <string name="app_name">Piękności pinballowe</string>
     
   <string name="about_text">Pinball Beauties 1.0.0, praca w oparciu o Vector Pinball 1.12.1\n© 2010–2023 Brian Nenninger\n\nKomentarze i raporty o błędach:\nemailimappop3test@gmail.com\n\nhttps://github.com/robmat/android_pinball_with_pics_as_prize \n\nDotknij ekranu, aby rozpocząć nową grę, wystrzel piłkę, jeśli nie jest ona w grze, i aktywuj płetwy. Dotknij obszaru wyniku, aby wstrzymać grę.\n\n[TABLE_RULES]\n\nPozycja menu Preferencje umożliwia zmianę następujących ustawień:\n- Dźwięk: włącza i wyłącza efekty dźwiękowe.\n- Muzyka w tle: włącza i wyłącza wyłączona muzyka w tle.\n- Opinia dotykowa: wibruje przy uderzeniach w zderzak i innych zdarzeniach w grze.\n- Niezależne płetwy: Jeśli opcja jest odznaczona, każde dotknięcie aktywuje obie płetwy. Po zaznaczeniu musisz dotknąć lewej strony ekranu, aby włączyć lewą płetwę, i prawej strony, aby uzyskać prawą płetwę.\n- Powiększenie: Po zaznaczeniu widok będzie powiększony na lokalizację piłki podczas gry.\ n- Renderowanie OpenGL: Używa OpenGL do rysowania grafiki. Zwykle zapewnia to najlepszą kombinację jakości grafiki i wydajności, ale niektóre urządzenia mogą działać lepiej po wyłączeniu tej opcji.\n- Pokaż FPS: Po zaznaczeniu pokazuje klatki rysowane na sekundę w lewym górnym rogu.\n\nVector Pinball jest oprogramowaniem typu open source; kod znajduje się pod adresem\nhttps://github.com/dozingcat/Vector-Pinball\n\nPodziękowania dla Mario Zechnera za ulepszenie kodu i bibliotekę libgdx.\n\nDźwięk, muzyka i kod audio autorstwa pdx\nTwittering Machine\nhttps: //www.twittering.com</string>
     
@@ -222,4 +221,7 @@
   <string name="rate_this_app_never">W ogóle nie oceniaj tej aplikacji.</string>
   
   <string name="wallpaper_ok">Obraz został ustawiony jako tapeta</string>
+    <string name="previous_table_content_description">Poprzedni stół</string>
+    <string name="next_table_content_description">Następny stół</string>
+    <string name="game_paused_content_description">Gra wstrzymana</string>
 </resources>

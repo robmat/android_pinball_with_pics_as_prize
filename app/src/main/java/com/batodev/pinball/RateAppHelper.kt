@@ -13,23 +13,24 @@ import com.google.android.play.core.review.ReviewException
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.android.play.core.review.model.ReviewErrorCode
 
-
 private const val WHEN_TO_SHOW_APP_RATE_POPUP = "WHEN_TO_SHOW_APP_RATE_POPUP"
 private const val ACTION_COUNT = "ACTION_COUNT"
 private const val DO_NOT_SHOW_ADS_EVER = Integer.MIN_VALUE
+private const val DEFAULT_ACTIONS_BEFORE_RATE_PROMPT = 3
+private const val POST_RATE_AD_COUNTER_GRACE = -5
 
 object RateAppHelper {
     fun increaseRateAppCounterAndShowDialogIfApplicable(activity: Activity) {
         Log.d(RateAppHelper.javaClass.simpleName, "increaseRateAppCounterAndShowDialogIfApplicable")
         val prefs = activity.getSharedPreferences(RateAppHelper.javaClass.simpleName, Context.MODE_PRIVATE)
-        val whenToShow = prefs.getInt(WHEN_TO_SHOW_APP_RATE_POPUP, 3)
+        val whenToShow = prefs.getInt(WHEN_TO_SHOW_APP_RATE_POPUP, DEFAULT_ACTIONS_BEFORE_RATE_PROMPT)
         var actionCount = prefs.getInt(ACTION_COUNT, 0)
         if (actionCount == DO_NOT_SHOW_ADS_EVER) {
             Log.d(RateAppHelper.javaClass.simpleName, "doing nothing since actionCount: $actionCount")
             return
         }
         ++actionCount
-        Log.d(RateAppHelper.javaClass.simpleName, "whenToShow: $whenToShow, actionCount: ${actionCount}")
+        Log.d(RateAppHelper.javaClass.simpleName, "whenToShow: $whenToShow, actionCount: $actionCount")
         if (actionCount >= whenToShow) {
             showRateAppPopup(activity, prefs)
         }
@@ -64,7 +65,6 @@ object RateAppHelper {
                         // matter the result, we continue our app flow.
                         Log.d(RateAppHelper.javaClass.simpleName, "Review ok")
                     }
-
                 } else {
                     // There was some problem, log or handle the error code.
                     @ReviewErrorCode val reviewErrorCode = (task.exception as ReviewException).errorCode
@@ -73,9 +73,9 @@ object RateAppHelper {
             }
             popupWindow.dismiss()
             prefs.edit {
-                putInt(AD_COUNTER, -5)
+                putInt(AD_COUNTER, POST_RATE_AD_COUNTER_GRACE)
                 apply()
-                Log.d(RateAppHelper.javaClass.simpleName, "saved $AD_COUNTER: -5")
+                Log.d(RateAppHelper.javaClass.simpleName, "saved $AD_COUNTER: $POST_RATE_AD_COUNTER_GRACE")
             }
         }
         val btnRateLater = popupView.findViewById<Button>(R.id.btnRateLater)

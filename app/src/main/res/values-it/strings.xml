@@ -79,4 +79,7 @@
   <string name="rate_this_app_later">Valuta questa app più tardi.</string>
   <string name="rate_this_app_never">Non valutare questa app.</string>
   <string name="wallpaper_ok">L\'immagine è stata impostata come sfondo</string>
+    <string name="previous_table_content_description">Tabella precedente</string>
+    <string name="next_table_content_description">Tabella successiva</string>
+    <string name="game_paused_content_description">Gioco in pausa</string>
 </resources>

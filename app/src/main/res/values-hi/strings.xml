@@ -79,4 +79,7 @@
   <string name="rate_this_app_later">इस ऐप को बाद में रेटिंग दें.</string>
   <string name="rate_this_app_never">इस ऐप को बिल्कुल भी रेटिंग न दें.</string>
   <string name="wallpaper_ok">चित्र को आपके वॉलपेपर के रूप में सेट कर दिया गया है</string>
+    <string name="previous_table_content_description">पिछली तालिका</string>
+    <string name="next_table_content_description">अगली तालिका</string>
+    <string name="game_paused_content_description">खेल रुका हुआ</string>
 </resources>

@@ -204,7 +204,6 @@
     
   <string name="image_unlocked_msg_10k">Neues Bild zur Galerie hinzugefügt!</string>
     
-  <string name="app_name">Flipper-Schönheiten</string>
     
   <string name="about_text">Pinball Beauties 1.0.0, Arbeit basierend auf Vector Pinball 1.12.1\n© 2010–2023 Brian Nenninger\n\nKommentare und Fehlerberichte:\nemailimappop3test@gmail.com\n\nhttps://github.com/robmat/android_pinball_with_pics_as_prize \n\nBerühren Sie den Bildschirm, um ein neues Spiel zu starten, werfen Sie einen Ball, wenn einer nicht im Spiel ist, und aktivieren Sie die Flossen. Berühren Sie den Punktebereich, um das Spiel zu pausieren.\n\n[TABLE_RULES]\n\nÜber den Menüpunkt „Einstellungen“ können Sie die folgenden Einstellungen ändern:\n- Sound: Aktiviert und deaktiviert Soundeffekte.\n- Hintergrundmusik: Aktiviert und Hintergrundmusik deaktiviert.\n- Haptisches Feedback: Vibriert bei Stoßstangentreffern und anderen Spielereignissen.\n- Unabhängige Flipper: Wenn diese Option deaktiviert ist, aktiviert jede Berührung beide Flipper. Wenn diese Option aktiviert ist, müssen Sie die linke Seite des Bildschirms für den linken Flipper und die rechte Seite für den rechten Flipper berühren.\n- Zoom: Wenn diese Option aktiviert ist, wird die Ansicht während des Spiels auf die Position des Balls vergrößert.\ n- OpenGL-Rendering: Verwendet OpenGL zum Zeichnen von Grafiken. Dies bietet normalerweise die beste Kombination aus Grafikqualität und Leistung, aber einige Geräte schneiden möglicherweise besser ab, wenn es deaktiviert ist.\n- FPS anzeigen: Wenn diese Option aktiviert ist, werden die pro Sekunde gezeichneten Bilder oben links angezeigt.\n\nVector Pinball ist Open Source; Der Code ist unter\nhttps://github.com/dozingcat/Vector-Pinball\n\nVielen Dank an Mario Zechner für Codeverbesserungen und libgdx.\n\nSound, Musik und Audiocode von pdx\nTwittering Machine\nhttps: //www.twittering.com</string>
     
@@ -221,4 +220,7 @@
   <string name="rate_this_app_never">Bewerten Sie diese App überhaupt nicht.</string>
   
   <string name="wallpaper_ok">Das Bild wurde als Hintergrundbild festgelegt</string>
+    <string name="previous_table_content_description">Vorheriger Tisch</string>
+    <string name="next_table_content_description">Nächster Tisch</string>
+    <string name="game_paused_content_description">Spiel pausiert</string>
 </resources>

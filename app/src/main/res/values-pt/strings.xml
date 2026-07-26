@@ -79,4 +79,7 @@
   <string name="rate_this_app_later">Avalie este aplicativo mais tarde.</string>
   <string name="rate_this_app_never">Não avalie este aplicativo.</string>
   <string name="wallpaper_ok">A imagem foi definida como seu papel de parede</string>
+    <string name="previous_table_content_description">Tabela anterior</string>
+    <string name="next_table_content_description">Próxima tabela</string>
+    <string name="game_paused_content_description">Jogo pausado</string>
 </resources>

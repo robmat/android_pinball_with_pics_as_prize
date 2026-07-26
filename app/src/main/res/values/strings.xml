@@ -27,6 +27,9 @@
     <string name="table7_rules">Table Rules:\n- The center of the table contains a star map. Shoot one of the ramps with the flashing green arrows to cause the map to move to a constellation.\n- The stars that make up the constellation will appear in green. Roll the ball over them to activate them; they will turn yellow and lines will connect activated stars to draw the constellation outline.\n- When the constellation outline is complete, shoot the right ramp with the flashing yellow arrow to lock the ball. Repeat this process with two more constellations. Locking the third ball will start multiball.\n- In multiball, complete the remaining constellations and then shoot the right ramp for a jackpot.\n- The game starts with ball savers in the left and right outlanes, which disappear when used. Hit all drop targets on the left or right side to restore them.</string>
 
     <string name="change_table_button_label">Select Table</string>
+    <string name="previous_table_content_description">Previous table</string>
+    <string name="next_table_content_description">Next table</string>
+    <string name="game_paused_content_description">Game paused</string>
     <string name="help_button_label">Help</string>
     <string name="preferences_button_label">Preferences</string>
     <string name="start_game_button_label">Start Game</string>
@@ -79,6 +82,8 @@
     <string name="image_unlocked_msg_100k">A hidden image is unlocked!</string>
     <string name="image_unlocked_msg_10k">New image added to the gallery!</string>
     <string name="back">Back</string>
+    <string name="gallery_previous_label" translatable="false">&lt;</string>
+    <string name="gallery_next_label" translatable="false">&gt;</string>
     <string name="show_gallery_button_label">Gallery</string>
     <string name="play_the_game_to_unlock_pictures">Play the game first to unlock new pictures!</string>
     <string name="more_games_button_label">More games</string>

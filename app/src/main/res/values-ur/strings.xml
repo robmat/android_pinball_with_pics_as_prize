@@ -79,4 +79,7 @@
   <string name="rate_this_app_later">بعد میں اس ایپ کی درجہ بندی کریں۔</string>
   <string name="rate_this_app_never">اس ایپ کو بالکل بھی درجہ نہ دیں۔</string>
   <string name="wallpaper_ok">تصویر کو آپ کے وال پیپر کے طور پر سیٹ کر دیا گیا ہے۔</string>
+    <string name="previous_table_content_description">پچھلا ٹیبل</string>
+    <string name="next_table_content_description">اگلا ٹیبل</string>
+    <string name="game_paused_content_description">گیم موقوف ہے</string>
 </resources>

@@ -79,4 +79,7 @@
   <string name="rate_this_app_later">Оцените это приложение позже.</string>
   <string name="rate_this_app_never">Не оценивайте это приложение вообще.</string>
   <string name="wallpaper_ok">Картинка установлена ​​в качестве обоев.</string>
+    <string name="previous_table_content_description">Предыдущая таблица</string>
+    <string name="next_table_content_description">Следующая таблица</string>
+    <string name="game_paused_content_description">Игра приостановлена</string>
 </resources>

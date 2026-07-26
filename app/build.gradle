@@ -5,6 +5,7 @@ plugins {
     id 'com.batodev.releasetools'
     id 'com.github.ben-manes.versions'
     id 'se.patrikerdes.use-latest-versions'
+    id 'io.gitlab.arturbosch.detekt'
 }
 
 def localProperties = new Properties()
@@ -98,6 +99,8 @@ configurations { natives }
 
 // libgdx native libraries are copied to libs/ by the copyAndroidNatives task.
 dependencies {
+    detektPlugins 'io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8'
+
     implementation 'androidx.core:core-ktx:1.19.0'
     implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'com.google.android.material:material:1.14.0'

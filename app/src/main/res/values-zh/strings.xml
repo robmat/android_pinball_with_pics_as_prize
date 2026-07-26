@@ -79,4 +79,7 @@
   <string name="rate_this_app_later">稍后评价此应用。</string>
   <string name="rate_this_app_never">根本不要对这个应用程序进行评分。</string>
   <string name="wallpaper_ok">该图片已设置为您的壁纸</string>
+    <string name="previous_table_content_description">上一个表</string>
+    <string name="next_table_content_description">下一个表</string>
+    <string name="game_paused_content_description">游戏已暂停</string>
 </resources>

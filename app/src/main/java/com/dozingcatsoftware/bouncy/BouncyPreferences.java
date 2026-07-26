@@ -2,7 +2,6 @@ package com.dozingcatsoftware.bouncy;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
@@ -25,9 +24,7 @@ public class BouncyPreferences extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.getWindow().setNavigationBarColor(Color.BLACK);
-        }
+        this.getWindow().setNavigationBarColor(Color.BLACK);
 
         // If multitouch or haptic feedback APIs aren't available, disable the preference items.
         if (!supportsMultitouch()) {

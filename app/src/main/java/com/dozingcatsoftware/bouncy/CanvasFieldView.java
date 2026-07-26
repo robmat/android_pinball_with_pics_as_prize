@@ -42,6 +42,10 @@ public class CanvasFieldView extends SurfaceView implements IFieldRenderer.Float
         return manager.handleTouchEvent(event);
     }
 
+    @Override public boolean performClick() {
+        return super.performClick();
+    }
+
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         return manager.handleKeyDown(keyCode, event);
     }
