@@ -3,8 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.github.triplet.play'
     id 'com.batodev.releasetools'
-    id 'com.github.ben-manes.versions'
-    id 'se.patrikerdes.use-latest-versions'
     id 'io.gitlab.arturbosch.detekt'
 }
 
@@ -92,25 +90,28 @@ play {
 }
 
 ext {
-    gdxVersion = '1.13.1'
+    // Sourced from the shared catalog (libs.versions.gdx) rather than a bare literal,
+    // since the natives coordinates below need it interpolated into a classifier
+    // string that Gradle version catalogs can't express directly.
+    gdxVersion = libs.versions.gdx.get()
 }
 
 configurations { natives }
 
 // libgdx native libraries are copied to libs/ by the copyAndroidNatives task.
 dependencies {
-    detektPlugins 'io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8'
+    detektPlugins libs.detekt.formatting
 
-    implementation 'androidx.core:core-ktx:1.19.0'
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'com.google.android.material:material:1.14.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
-    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
-    implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
-    implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-    implementation "com.google.android.gms:play-services-ads:25.4.0"
-    implementation 'com.google.android.play:review:2.0.2'
-    implementation 'com.google.android.play:review-ktx:2.0.2'
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.constraintlayout
+    implementation libs.chrisbanes.photoview
+    implementation libs.gdx
+    implementation libs.gdx.box2d
+    implementation libs.play.services.ads
+    implementation libs.google.play.review
+    implementation libs.google.play.review.ktx
     natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
     natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
     natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
@@ -120,11 +121,11 @@ dependencies {
     natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"
     natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
 
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
+    coreLibraryDesugaring libs.android.tools.desugar.jdk.libs
 
-    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.7.0'
+    androidTestImplementation libs.androidx.test.ext.junit
+    androidTestImplementation libs.androidx.test.espresso.core
+    androidTestImplementation libs.androidx.test.espresso.intents
 }
 
 // Called every time gradle gets executed, takes the native dependencies of
