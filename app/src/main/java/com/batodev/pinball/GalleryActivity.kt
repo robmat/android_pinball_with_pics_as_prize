@@ -56,7 +56,7 @@ class GalleryActivity : Activity() {
         currentPic = pics[settingsHelper.preferences.lastSeenGalleryPic]
     }
 
-    fun leftClicked(view: View) {
+    fun leftClicked(ignored: View) {
         val indexOf = pics.indexOf(currentPic)
         if (indexOf > 0) {
             findViewById<PhotoView>(R.id.gallery_activity_background).setImageBitmap(
@@ -68,7 +68,7 @@ class GalleryActivity : Activity() {
         showAD()
     }
 
-    fun rightClicked(view: View) {
+    fun rightClicked(ignored: View) {
         val indexOf = pics.indexOf(currentPic)
         if (indexOf < pics.size - 1) {
             findViewById<PhotoView>(R.id.gallery_activity_background).setImageBitmap(
@@ -101,11 +101,11 @@ class GalleryActivity : Activity() {
         }
     }
 
-    fun backClicked(view: View) {
+    fun backClicked(ignored: View) {
         finish()
     }
 
-    fun shareClicked(view: View) {
+    fun shareClicked(ignored: View) {
         val imgFolder = ImageHelper.findPathForImage(this.assets, currentPic)
         val inputStream = assets.open("${imgFolder}${File.separator}$currentPic")
         val tmpImgPath = "tmp_shared/tmp.png"
@@ -129,7 +129,7 @@ class GalleryActivity : Activity() {
         startActivity(shareIntent)
     }
 
-    fun wallpaperClicked(view: View) {
+    fun wallpaperClicked(ignored: View) {
         try {
             val fileShared = copyToTempFile()
             val wallpaperManager = WallpaperManager.getInstance(this)

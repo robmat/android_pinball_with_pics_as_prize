@@ -1,3 +1,5 @@
+import javax.inject.Inject
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -124,28 +126,49 @@ dependencies {
 // Called every time gradle gets executed, takes the native dependencies of
 // the natives configuration, and extracts them to the proper libs/ folders
 // so they get packed with the APK.
-tasks.register('copyAndroidNatives') {
-    doFirst {
-        file("libs/armeabi-v7a/").mkdirs()
-        file("libs/arm64-v8a/").mkdirs()
-        file("libs/x86_64/").mkdirs()
-        file("libs/x86/").mkdirs()
+//
+// A real (typed) task class rather than an ad-hoc `doFirst { file(...); copy {} }`
+// block: the configuration cache forbids referencing Project-scoped methods like
+// file()/copy()/zipTree() from a task action at execution time, so the copy/unzip
+// work goes through the injected FileSystemOperations/ArchiveOperations services
+// instead - see https://docs.gradle.org/current/userguide/configuration_cache_requirements.html
+abstract class CopyAndroidNatives extends DefaultTask {
+    @InputFiles
+    abstract ConfigurableFileCollection getNativesJars()
 
-        configurations.natives.copy().files.each { jar ->
-            def outputDir = null
-            if(jar.name.endsWith("natives-armeabi-v7a.jar")) outputDir = file("libs/armeabi-v7a")
-            if(jar.name.endsWith("natives-arm64-v8a.jar")) outputDir = file("libs/arm64-v8a")
-            if(jar.name.endsWith("natives-x86_64.jar")) outputDir = file("libs/x86_64")
-            if(jar.name.endsWith("natives-x86.jar")) outputDir = file("libs/x86")
-            if(outputDir != null) {
-                copy {
-                    from zipTree(jar)
-                    into outputDir
+    @OutputDirectory
+    abstract DirectoryProperty getLibsDir()
+
+    @Inject
+    abstract FileSystemOperations getFs()
+
+    @Inject
+    abstract ArchiveOperations getArchive()
+
+    @TaskAction
+    void copyNatives() {
+        def abiDirs = ["armeabi-v7a", "arm64-v8a", "x86_64", "x86"].collectEntries { abi ->
+            def dir = libsDir.dir(abi).get().asFile
+            dir.mkdirs()
+            [(abi): dir]
+        }
+
+        nativesJars.files.each { jar ->
+            def targetDir = abiDirs.find { abi, dir -> jar.name.endsWith("natives-${abi}.jar") }?.value
+            if (targetDir != null) {
+                fs.copy {
+                    from archive.zipTree(jar)
+                    into targetDir
                     include "*.so"
                 }
             }
         }
     }
+}
+
+tasks.register('copyAndroidNatives', CopyAndroidNatives) {
+    nativesJars.from(configurations.natives)
+    libsDir.set(layout.projectDirectory.dir("libs"))
 }
 
 tasks.matching { it.name.contains("merge") && it.name.contains("JniLibFolders") }.configureEach { packageTask ->
