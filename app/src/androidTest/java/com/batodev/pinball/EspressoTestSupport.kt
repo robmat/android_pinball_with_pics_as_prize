@@ -16,7 +16,10 @@ import org.junit.Assert.assertEquals
 // No Activity here overrides back-press (doQuit() just calls finish()), so
 // the standard press-back-and-expect-DESTROYED pattern applies everywhere.
 
-fun assertEventuallyDestroyed(scenario: ActivityScenario<*>, timeoutMs: Long = 8_000) {
+fun assertEventuallyDestroyed(
+    scenario: ActivityScenario<*>,
+    timeoutMs: Long = 8_000,
+) {
     val deadline = System.currentTimeMillis() + timeoutMs
     while (scenario.state != Lifecycle.State.DESTROYED && System.currentTimeMillis() < deadline) {
         Thread.sleep(50)
@@ -48,10 +51,16 @@ fun resetSettings(configure: Preferences.() -> Unit = {}) {
     settingsHelper.savePreferences()
 }
 
-fun waitFor(millis: Long): ViewAction = object : ViewAction {
-    override fun getConstraints(): Matcher<View> = isRoot()
-    override fun getDescription(): String = "wait for ${millis}ms while pumping the main looper"
-    override fun perform(uiController: UiController, view: View) {
-        uiController.loopMainThreadForAtLeast(millis)
+fun waitFor(millis: Long): ViewAction =
+    object : ViewAction {
+        override fun getConstraints(): Matcher<View> = isRoot()
+
+        override fun getDescription(): String = "wait for ${millis}ms while pumping the main looper"
+
+        override fun perform(
+            uiController: UiController,
+            view: View,
+        ) {
+            uiController.loopMainThreadForAtLeast(millis)
+        }
     }
-}

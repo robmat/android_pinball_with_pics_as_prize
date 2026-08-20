@@ -41,15 +41,19 @@ object RateAppHelper {
         }
     }
 
-    fun showRateAppPopup(activity: Activity, prefs: SharedPreferences) {
+    fun showRateAppPopup(
+        activity: Activity,
+        prefs: SharedPreferences,
+    ) {
         val inflater = activity.layoutInflater
         val popupView = inflater.inflate(R.layout.popup_rate_app, activity.findViewById(R.id.main), false)
-        val popupWindow = PopupWindow(
-            popupView,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            true
-        )
+        val popupWindow =
+            PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true,
+            )
         val btnRateNow = popupView.findViewById<Button>(R.id.btnRateNow)
         btnRateNow.setOnClickListener {
             onNeverPressed(prefs)

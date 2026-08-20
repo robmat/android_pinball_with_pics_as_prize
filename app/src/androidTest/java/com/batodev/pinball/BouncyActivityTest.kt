@@ -35,7 +35,6 @@ import org.junit.runner.RunWith
 // directly instead (see GalleryActivityTest).
 @RunWith(AndroidJUnit4::class)
 class BouncyActivityTest {
-
     @Before
     fun setUp() {
         resetSettings()

@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 
-class SettingsHelper(context: Context) {
+class SettingsHelper(
+    context: Context,
+) {
     private val sharedPreferences: SharedPreferences
     val preferences: Preferences
 
@@ -33,5 +35,5 @@ class SettingsHelper(context: Context) {
 
 data class Preferences(
     var uncoveredPics: MutableList<String>,
-    var lastSeenGalleryPic: Int = 0
+    var lastSeenGalleryPic: Int = 0,
 )

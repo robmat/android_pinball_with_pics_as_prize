@@ -17,12 +17,12 @@ import org.junit.runner.RunWith
 // launched directly here the same way.
 @RunWith(AndroidJUnit4::class)
 class AboutActivityTest {
-
     private fun launch(): ActivityScenario<AboutActivity> {
-        val intent = Intent(
-            InstrumentationRegistry.getInstrumentation().targetContext,
-            AboutActivity::class.java
-        ).apply { putExtra("level", 1) }
+        val intent =
+            Intent(
+                InstrumentationRegistry.getInstrumentation().targetContext,
+                AboutActivity::class.java,
+            ).apply { putExtra("level", 1) }
         return ActivityScenario.launch(intent)
     }
 
