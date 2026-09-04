@@ -1,5 +1,6 @@
 package com.dozingcatsoftware.bouncy;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -65,6 +66,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+// stringLookupFn deliberately resolves message keys from Field/table data via resource-name
+// reflection (getIdentifier) - the whole point of IStringResolver is to look strings up by a
+// name computed at runtime, so there's no static R.string.* reference to switch to.
+@SuppressLint("DiscouragedApi")
 public class BouncyActivity extends Activity {
 
     static {
@@ -78,9 +83,7 @@ public class BouncyActivity extends Activity {
     GLFieldView glFieldView;
     GL10Renderer gl10Renderer;
     GL20Renderer gl20Renderer;
-    // Semi-arbitrary requirement for Android 6.0 or later to use the OpenGL ES 2.0 renderer.
-    // Older devices tend to perform better with 1.0.
-    final boolean useOpenGL20 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+    final boolean useOpenGL20 = true;
 
     View buttonPanel;
     View highScorePanel;

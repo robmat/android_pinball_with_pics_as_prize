@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Random;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.media.AudioManager;
@@ -19,6 +20,10 @@ public class VPSoundpool {
     private static SoundPool mSoundPool;
     private static HashMap<Integer, Integer> mSoundPoolMap;
     private static AudioManager  mAudioManager;
+    // Always assigned theContext.getApplicationContext() in initSounds() below, never an
+    // Activity - lint's StaticFieldLeak check flags any static Context-typed field regardless,
+    // since it can't verify the narrowing at the assignment site.
+    @SuppressLint("StaticFieldLeak")
     private static Context mContext;
     private static Random mRandom = new Random();
 
@@ -49,7 +54,7 @@ public class VPSoundpool {
 
     public static void initSounds(Context theContext) {
         Log.v(LOG_TAG, "initSounds");
-        mContext = theContext;
+        mContext = theContext.getApplicationContext();
         mSoundPool = new SoundPool(32, AudioManager.STREAM_MUSIC, 0);
         mSoundPoolMap = new HashMap<>();
         mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);

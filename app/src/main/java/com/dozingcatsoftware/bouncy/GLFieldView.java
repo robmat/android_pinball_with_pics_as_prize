@@ -26,6 +26,9 @@ public class GLFieldView extends GLSurfaceView {
      * progress, and launches a ball if one is not in play.
      */
     @Override public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            performClick();
+        }
         return manager.handleTouchEvent(event);
     }
 
