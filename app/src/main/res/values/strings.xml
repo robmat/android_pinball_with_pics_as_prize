@@ -50,7 +50,9 @@
     <string name="touch_to_start_message">Touch to start</string>
     <string name="last_score_message">Last Score: %1$s</string>
     <string name="top_high_score_message">High Score: %1$s</string>
-    <string name="other_high_score_message">#%1$d Score: %2$s</string>
+    <!-- %1$d is the leaderboard rank (#1, #2, ...), an identifier - not a
+         countable quantity - so plural grammar doesn't apply here. -->
+    <string name="other_high_score_message" tools:ignore="PluralsCandidate">#%1$d Score: %2$s</string>
     <string name="no_high_scores_message">No scores for this table</string>
 
     <string name="left_save_enabled_message" tools:ignore="UnusedResources">Left Save Enabled</string>
@@ -64,7 +66,9 @@
     <string name="jackpot_received_with_multipler_message" tools:ignore="UnusedResources">%1$dx Jackpot!</string>
     <string name="multiball_ready_message" tools:ignore="UnusedResources">Multiball Ready</string>
     <string name="ball_lock_ready_message" tools:ignore="UnusedResources">Ball Lock Ready</string>
-    <string name="ball_locked_message" tools:ignore="UnusedResources">Ball %1$d Locked</string>
+    <!-- %1$d identifies which ball (Ball 1, Ball 2, ...), an identifier -
+         not a countable quantity - so plural grammar doesn't apply here. -->
+    <string name="ball_locked_message" tools:ignore="UnusedResources,PluralsCandidate">Ball %1$d Locked</string>
     <string name="shoot_pyramid_message" tools:ignore="UnusedResources">Shoot the Pyramid!</string>
     <string name="extra_ball_received_message" tools:ignore="UnusedResources">Extra Ball!</string>
     <string name="blue_ramp_bonus_message" tools:ignore="UnusedResources">Blue ramp +%1$d%%</string>
@@ -75,7 +79,10 @@
     <string name="color_red" tools:ignore="UnusedResources">Red</string>
     <string name="color_yellow" tools:ignore="UnusedResources">Yellow</string>
     <string name="color_green" tools:ignore="UnusedResources">Green</string>
-    <string name="planet_activated_message" tools:ignore="UnusedResources">Planet %1$d Activated!</string>
+    <!-- %1$d identifies which planet (Planet 1, Planet 2, ...), an
+         identifier - not a countable quantity - so plural grammar doesn't
+         apply here. -->
+    <string name="planet_activated_message" tools:ignore="UnusedResources,PluralsCandidate">Planet %1$d Activated!</string>
     <string name="ramp_bonus_message" tools:ignore="UnusedResources">%1$dx Ramp</string>
     <string name="ramp_bonus_increased_message" tools:ignore="UnusedResources">Ramp bonus increased</string>
     <string name="shoot_ramp_jackpot_message" tools:ignore="UnusedResources">Shoot ramp for jackpot</string>
