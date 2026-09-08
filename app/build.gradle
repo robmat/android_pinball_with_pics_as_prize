@@ -105,6 +105,10 @@ dependencies {
     implementation libs.gdx
     implementation libs.gdx.box2d
     implementation libs.play.services.ads
+    // play-services-ads transitively pins the ancient androidx.work:work-runtime:2.7.0 -
+    // override it so WorkManager's own WorkDatabase creation doesn't crash on real
+    // devices (see sgtpuzzles' fix for the full incident writeup).
+    implementation libs.androidx.work.runtime
     implementation libs.google.play.review
     implementation libs.google.play.review.ktx
     natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
