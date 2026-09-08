@@ -38,6 +38,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.badlogic.gdx.physics.box2d.Box2D;
+import com.badlogic.gdx.utils.GdxNativesLoader;
 import com.batodev.pinball.AdHelper;
 import com.batodev.pinball.GalleryActivity;
 import com.batodev.pinball.ImageHelper;
@@ -73,6 +74,12 @@ import java.util.Objects;
 public class BouncyActivity extends Activity {
 
     static {
+        // Box2D.init() only loads libgdx-box2d.so, not libgdx.so - since this Activity
+        // never goes through AndroidApplication.initialize() (which normally does this),
+        // libgdx.so's own native methods (e.g. BufferUtils.getBufferAddress, which Box2D's
+        // World/Body construction depends on) were never registered. Worked by accident pre
+        // gdx 1.14.2's jnigen-loader refactor; explicit now that it no longer does.
+        GdxNativesLoader.load();
         Box2D.init();
     }
 
