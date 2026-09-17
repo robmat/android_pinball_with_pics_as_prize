@@ -12,3 +12,23 @@
 # Vendored upstream pinball engine - reflection-free, but keep the entry Activity's
 # name stable so the manifest and any launcher shortcuts keep resolving.
 -keep class com.dozingcatsoftware.bouncy.BouncyActivity { *; }
+
+# libGDX Box2D calls back into these from native C++ via JNI, so no Java caller exists and
+# R8 strips them. The game then dies mid-physics with
+# "NoSuchMethodError: no non-static method Lcom/badlogic/gdx/physics/box2d/World;.beginContact(J)V".
+# Same rule set screws_android (the other libGDX app here) already carries.
+-keepclassmembers class com.badlogic.gdx.physics.box2d.World {
+   boolean contactFilter(long, long);
+   boolean getUseDefaultContactFilter();
+   void    beginContact(long);
+   void    endContact(long);
+   void    preSolve(long, long);
+   void    postSolve(long, long);
+   boolean reportFixture(long);
+   float   reportRayFixture(long, float, float, float, float, float);
+}
+-dontwarn com.badlogic.gdx.backends.android.AndroidFragmentApplication
+-keep class com.badlogic.gdx.controllers.android.AndroidControllers
+-keep public class com.badlogic.gdx.scenes.scene2d.** { *; }
+-keep public class com.badlogic.gdx.graphics.g2d.BitmapFont { *; }
+-keep public class com.badlogic.gdx.graphics.Color { *; }
