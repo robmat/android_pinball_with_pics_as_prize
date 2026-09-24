@@ -43,6 +43,9 @@ class GalleryActivity : Activity() {
             controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
         setContentView(R.layout.gallery_activity)
+        avoidNavigationBarOverlap(findViewById(R.id.gallery_back_btn))
+        avoidNavigationBarOverlap(findViewById(R.id.gallery_share_btn))
+        avoidNavigationBarOverlap(findViewById(R.id.gallery_wallpaper_btn))
     }
 
     override fun onResume() {
@@ -50,10 +53,20 @@ class GalleryActivity : Activity() {
         pics.clear()
         val settingsHelper = SettingsHelper(this)
         pics.addAll(settingsHelper.preferences.uncoveredPics)
+        // Nothing to page through until a picture has been uncovered. The entry point guards
+        // this, but the activity can still be resumed with the preferences cleared, and
+        // indexing an empty list here crashed the process.
+        if (pics.isEmpty()) {
+            finish()
+            return
+        }
+        // lastSeenGalleryPic is persisted separately from uncoveredPics, so it can point past
+        // the end once that list shrinks.
+        val lastSeen = settingsHelper.preferences.lastSeenGalleryPic.coerceIn(0, pics.size - 1)
         findViewById<PhotoView>(R.id.gallery_activity_background).setImageBitmap(
-            ImageHelper.findBitmap(pics[settingsHelper.preferences.lastSeenGalleryPic], this),
+            ImageHelper.findBitmap(pics[lastSeen], this),
         )
-        currentPic = pics[settingsHelper.preferences.lastSeenGalleryPic]
+        currentPic = pics[lastSeen]
     }
 
     fun leftClicked(ignored: View) {
