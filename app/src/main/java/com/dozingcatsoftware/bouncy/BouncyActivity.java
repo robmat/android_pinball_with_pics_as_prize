@@ -368,6 +368,14 @@ public class BouncyActivity extends Activity {
         super.onPause();
     }
 
+    // Every touch (flipper, button, anywhere) holds back a queued end-of-game interstitial, so it
+    // never opens under a finger that is still playing.
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        AdHelper.INSTANCE.postponePendingAd();
+    }
+
     @Override
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         // This handles the main activity pausing and resuming.
@@ -693,6 +701,8 @@ public class BouncyActivity extends Activity {
             return;
         }
         if (!field.getGameState().isGameInProgress()) {
+            // The player restarted without pausing long enough for the end-of-game ad: skip it.
+            AdHelper.INSTANCE.cancelPendingAd();
             // https://github.com/dozingcat/Vector-Pinball/issues/91
             // These actions need to be synchronized so that we don't try to
             // start the game while the FieldDriver thread is updating the

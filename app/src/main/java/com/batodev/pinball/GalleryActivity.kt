@@ -109,6 +109,7 @@ class GalleryActivity : Activity() {
 
     private fun showAD() {
         Log.d(GalleryActivity::class.java.simpleName, "Showing ad.")
+        AdHelper.postponePendingAd()
         if (++scrollCount >= SCROLL_AD_THRESHOLD) {
             AdHelper.showAd(this)
             scrollCount = 0
