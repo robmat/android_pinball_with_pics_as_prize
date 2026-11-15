@@ -9,9 +9,18 @@
 -keep class androidx.work.impl.WorkDatabase_Impl { <init>(); }
 -keep class * extends androidx.room.RoomDatabase { <init>(); }
 
-# Vendored upstream pinball engine - reflection-free, but keep the entry Activity's
-# name stable so the manifest and any launcher shortcuts keep resolving.
+# Vendored upstream pinball engine - keep the entry Activity's name stable so the manifest
+# and any launcher shortcuts keep resolving.
 -keep class com.dozingcatsoftware.bouncy.BouncyActivity { *; }
+
+# The engine is not reflection-free: the table JSON in assets/tables names each field element
+# ("class": "WallElement") and the table's delegate ("delegate": "Field1Delegate"), and the
+# engine builds them with Class.forName(name).getConstructor().newInstance(). Nothing calls
+# those classes directly, so R8 removed every one of them and 1.5 (code 51) crashed in
+# BouncyActivity.onCreate with "ClassNotFoundException: ...vectorpinball.elements.WallElement" -
+# Play rejected it for Broken Functionality. Keep the names and the no-arg constructors.
+-keep class * extends com.dozingcatsoftware.vectorpinball.elements.FieldElement { public <init>(); }
+-keep class * implements com.dozingcatsoftware.vectorpinball.model.Field$Delegate { public <init>(); }
 
 # libGDX Box2D calls back into these from native C++ via JNI, so no Java caller exists and
 # R8 strips them. The game then dies mid-physics with

@@ -12,6 +12,19 @@ import android.widget.TextView;
 import com.batodev.pinball.R;
 
 public class AboutActivity extends Activity {
+    // Rules text per table, indexed by level - 1. Referenced directly rather than looked up by
+    // name through reflection on R.string: R8 strips R's fields in release builds, so the
+    // reflective lookup silently failed and the rules never showed.
+    private static final int[] TABLE_RULES = {
+        R.string.table1_rules,
+        R.string.table2_rules,
+        R.string.table3_rules,
+        R.string.table4_rules,
+        R.string.table5_rules,
+        R.string.table6_rules,
+        R.string.table7_rules,
+    };
+
     /** Called when the activity is first created. */
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,16 +36,9 @@ public class AboutActivity extends Activity {
         // Get text to display by replacing "[TABLE_RULES]" with the contents of string resource
         // with ID table[level]_rules.
         String baseText = getString(R.string.about_text);
-        String tableRulesText = null;
-        try {
-            String fieldName = "table" + getIntent().getIntExtra("level", 1) + "_rules";
-            int tableRulesID = (Integer) R.string.class.getField(fieldName).get(null);
-            tableRulesText = getString(tableRulesID);
-        }
-        catch (Exception ex) {
-            tableRulesText = null;
-        }
-        if (tableRulesText == null) tableRulesText = "";
+        int level = getIntent().getIntExtra("level", 1);
+        String tableRulesText =
+                (level >= 1 && level <= TABLE_RULES.length) ? getString(TABLE_RULES[level - 1]) : "";
         String displayText = baseText.replace("[TABLE_RULES]", tableRulesText);
 
         TextView tv = findViewById(R.id.aboutTextView);

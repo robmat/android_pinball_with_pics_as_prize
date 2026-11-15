@@ -6,6 +6,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withSubstring
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.dozingcatsoftware.bouncy.AboutActivity
@@ -31,6 +32,16 @@ class AboutActivityTest {
         val scenario = launch()
 
         onView(withId(R.id.aboutTextView)).check(matches(isDisplayed()))
+        scenario.close()
+    }
+
+    @Test
+    fun showsRulesForRequestedTable() {
+        val scenario = launch()
+        val rules =
+            InstrumentationRegistry.getInstrumentation().targetContext.getString(R.string.table1_rules)
+
+        onView(withId(R.id.aboutTextView)).check(matches(withSubstring(rules)))
         scenario.close()
     }
 

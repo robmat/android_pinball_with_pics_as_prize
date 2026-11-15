@@ -77,7 +77,11 @@
 # across the fleet, including the two vendored upstream packages.
 -keep class com.batodev.** { *; }
 -keep class name.boyle.chris.** { *; }
--keep class com.dozingcatsoftware.** { *; }
+# Only the engine's Android shell (the Activities the tests drive) - never the engine model in
+# com.dozingcatsoftware.vectorpinball. Keeping that wholesale hid the reflective
+# Class.forName load of every table element, so the minified suite passed while the release
+# build crashed on launch (1.5, rejected by Play).
+-keep class com.dozingcatsoftware.bouncy.** { *; }
 
 # Below minSdk 24, D8 desugars Kotlin/Java default interface methods into synthetic
 # <Interface>$-CC companions holding static $default$ bridges. R8 renames those synthetics,
